@@ -2,7 +2,7 @@
 {
   public interface IFinancialItem
   {
-    string Name { get; set; }
+    string Title { get; set; }
 
     decimal Value { get; }
   }

@@ -8,10 +8,22 @@ namespace FinancialMonitoring.Entities
   {
     public Guid FinancialCategoryId { get; set; }
 
-    public string Name { get; set; }
+    public string Title { get; set; }
 
-    public List<IFinancialItem> ChildItems { get; } = new List<IFinancialItem>();
+    public Guid? ParentId { get; set; }
 
-    public decimal Value => ChildItems.Sum(child => child.Value);
+    public decimal Value => Items.Sum(item => item.Value) + ChildCategories.Sum(child => child.Value);
+
+    #region references
+
+    public FinancialCategory Parent { get; set; }
+
+    public List<FinancialCategory> ChildCategories { get; } = new List<FinancialCategory>();
+
+    public List<FinancialItem> Items { get; } = new List<FinancialItem>();
+
+    public List<AttachmentItem> Attachments { get; } = new List<AttachmentItem>();
+
+    #endregion
   }
 }

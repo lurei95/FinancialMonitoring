@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FinancialMonitoring.Entities
 {
@@ -6,14 +7,20 @@ namespace FinancialMonitoring.Entities
   {
     public Guid FinancialItemId { get; set; }
 
-    public Guid ParanetId { get; set; }
+    public Guid CategoryId { get; set; }
 
-    public FinancialCategory Parent { get; set; }
-
-    public string Name { get; set; }
+    public string Title { get; set; }
 
     public decimal Value { get; set; }
 
     public DateTime Date { get; set; }
+
+    #region references
+
+    public FinancialCategory Category { get; set; }
+
+    public List<AttachmentItem> Attachments { get; } = new List<AttachmentItem>();
+
+    #endregion
   }
 }
