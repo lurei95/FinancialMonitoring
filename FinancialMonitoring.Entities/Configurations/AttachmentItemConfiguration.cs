@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FinancialMonitoring.Entities.Configurations
 {
+  /// <summary>
+  /// Configuration for <see cref="AttachmentItem"/>
+  /// </summary>
   public sealed class AttachmentItemConfiguration : IEntityTypeConfiguration<AttachmentItem>
   {
+    /// <summary>
+    /// Configures EF Core for <see cref="AttachmentItem"/>
+    /// </summary>
+    /// <param name="builder">The builder</param>
     public void Configure(EntityTypeBuilder<AttachmentItem> builder)
     {
       builder.ToTable("FinancialItems", "Finance");
