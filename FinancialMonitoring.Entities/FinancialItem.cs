@@ -33,6 +33,9 @@ namespace FinancialMonitoring.Entities
     /// </summary>
     public DateTime Date { get; set; }
 
+    ///<inheritdoc/>
+    public object Id => FinancialItemId;
+
     #region references
 
     /// <summary>

@@ -24,6 +24,9 @@ namespace FinancialMonitoring.Entities
     /// </summary>
     public Guid? ParentId { get; set; }
 
+    ///<inheritdoc/>
+    public object Id => FinancialCategoryId;
+
     /// <summary>
     /// Total value of the category
     /// </summary>
