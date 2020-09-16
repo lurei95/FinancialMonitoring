@@ -7,7 +7,7 @@ namespace FinancialMonitoring.Entities
   /// <summary>
   /// A catgory in which multiple financial items can be organized
   /// </summary>
-  public sealed class FinancialCategory : IFinancialItem
+  public sealed class FinancialCategory : IFinancialItem, IEntity
   {
     /// <summary>
     /// Id of the category

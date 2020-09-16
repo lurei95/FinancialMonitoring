@@ -6,7 +6,7 @@ namespace FinancialMonitoring.Entities
   /// <summary>
   /// A fiancial item
   /// </summary>
-  public sealed class FinancialItem : IFinancialItem
+  public sealed class FinancialItem : IFinancialItem, IEntity
   {
     /// <summary>
     /// Id of the item
