@@ -1,40 +1,92 @@
+using FinancialMonitoring;
+using FinancialMonitoring.API;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using System;
+using System.Text;
 
 namespace WebApplication1
 {
+  /// <summary>
+  /// Startup class
+  /// </summary>
   public class Startup
   {
-    public Startup(IConfiguration configuration)
-    {
-      Configuration = configuration;
-    }
-
+    /// <summary>
+    /// Configuration
+    /// </summary>
     public IConfiguration Configuration { get; }
 
-    // This method gets called by the runtime. Use this method to add services to the container.
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="configuration">Configuration</param>
+    public Startup(IConfiguration configuration)
+    { Configuration = configuration; }
+
+    /// <summary>
+    /// Configures DI
+    /// </summary>
+    /// <param name="services">Service collection</param>
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
+      { configuration.RootPath = "ClientApp/dist"; });
+
+      //EF Core
+      services.AddDbContext<FinancialMonitoringDBContext>(
+       options => options.UseSqlServer(Configuration.GetConnectionString("Default")), ServiceLifetime.Transient);
+      services.AddTransient<DbContext, FinancialMonitoringDBContext>();
+
+      services.AddMvc(option => option.EnableEndpointRouting = false)
+        .SetCompatibilityVersion(CompatibilityVersion.Latest)
+        .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+      //Authentication
+      IConfigurationSection jwtSection = Configuration.GetSection("JWTSettings");
+      services.Configure<JWTSettings>(jwtSection);
+      JWTSettings jwtSettings = jwtSection.Get<JWTSettings>();
+      byte[] key = Encoding.ASCII.GetBytes(jwtSettings.SecretKey);
+      services.AddAuthentication(x =>
       {
-        configuration.RootPath = "ClientApp/dist";
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+      })
+      .AddJwtBearer(x =>
+      {
+        x.RequireHttpsMetadata = true;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+          ValidateIssuerSigningKey = true,
+          IssuerSigningKey = new SymmetricSecurityKey(key),
+          ValidateIssuer = false,
+          ValidateAudience = false,
+          ClockSkew = TimeSpan.Zero
+        };
       });
     }
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+    /// <summary>
+    /// Confiugures the HTTP pipeline
+    /// </summary>
+    /// <param name="app">app builder</param>
+    /// <param name="env">Host environment</param>
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
-      {
         app.UseDeveloperExceptionPage();
-      }
       else
       {
         app.UseExceptionHandler("/Error");
@@ -45,30 +97,21 @@ namespace WebApplication1
       app.UseHttpsRedirection();
       app.UseStaticFiles();
       if (!env.IsDevelopment())
-      {
         app.UseSpaStaticFiles();
-      }
 
       app.UseRouting();
 
-      app.UseEndpoints(endpoints =>
-      {
-        endpoints.MapControllerRoute(
-                  name: "default",
-                  pattern: "{controller}/{action=Index}/{id?}");
-      });
+      app.UseAuthentication();
+      app.UseAuthorization();
 
+      app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
       app.UseSpa(spa =>
       {
-              // To learn more about options for serving an Angular SPA from ASP.NET Core,
-              // see https://go.microsoft.com/fwlink/?linkid=864501
-
-              spa.Options.SourcePath = "ClientApp";
-
+         // To learn more about options for serving an Angular SPA from ASP.NET Core,
+        // see https://go.microsoft.com/fwlink/?linkid=864501
+        spa.Options.SourcePath = "ClientApp";
         if (env.IsDevelopment())
-        {
           spa.UseAngularCliServer(npmScript: "start");
-        }
       });
     }
   }

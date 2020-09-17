@@ -27,11 +27,13 @@ namespace FinancialMonitoring.Controllers.Finance
     public override async Task<ActionResult<FinancialCategory>> GetAsync(Guid id)
     {
       FinancialCategory category = await Context.Set<FinancialCategory>()
-        .Include(item => item.Attachments)
-        .FirstOrDefaultAsync(card => card.FinancialCategoryId == id);
+        .Include(category => category.Attachments)
+        .FirstOrDefaultAsync(category => category.FinancialCategoryId == id);
 
       if (category == null)
         return NotFound();
+      if (category.UserId != GetUserId())
+        return Unauthorized();
       return category;
     }
 
@@ -39,7 +41,8 @@ namespace FinancialMonitoring.Controllers.Finance
     public override async Task<ActionResult<List<FinancialCategory>>> GetAsync(IDictionary<string, object> searchParameters)
     {
       IQueryable<FinancialCategory> query = Context.Set<FinancialCategory>()
-        .Include(card => card.Attachments);
+        .Include(category => category.Attachments)
+        .Where(category => category.UserId == GetUserId());
       return await query.ToListAsync();
     }
   }

@@ -1,6 +1,7 @@
 ﻿using FinancialMonitoring.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -67,6 +68,8 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     {
       if (entity == null)
         return await Task.FromResult(BadRequest());
+      if (entity is IUserSpecificEntity userSpecificEntity)
+        userSpecificEntity.UserId = GetUserId();
       ActionResult<TEntity> result = await PostCoreAsync(entity);
       await Context.SaveChangesAsync();
       return result;
@@ -122,5 +125,11 @@ namespace SpacedRepetitionSystem.WebAPI.Core
       Context.Add(entity);
       return await Task.FromResult(entity);
     }
+
+    /// <summary>
+    /// Returns the id of the user authenticated by the jwt
+    /// </summary>
+    /// <returns></returns>
+    protected Guid GetUserId() => Guid.Parse(User.Identity.Name);
   }
 }
