@@ -5,7 +5,7 @@ namespace FinancialMonitoring.Entities
   /// <summary>
   /// An attachement to financial item or category
   /// </summary>
-  public sealed class AttachmentItem : IEntity
+  public sealed class AttachmentItem : IEntity, IUserSpecificEntity
   {
     /// <summary>
     /// Id of the attachement
@@ -34,5 +34,8 @@ namespace FinancialMonitoring.Entities
 
     ///<inheritdoc/>
     public object Id => AttachmentItemId;
+
+    ///<inheritdoc/>
+    public Guid UserId { get; set; }
   }
 }

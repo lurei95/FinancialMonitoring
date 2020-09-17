@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FinancialMonitoring.Entities
+namespace FinancialMonitoring.Entities.Finance
 {
   /// <summary>
   /// A fiancial item
   /// </summary>
-  public sealed class FinancialItem : IFinancialItem, IEntity
+  public sealed class FinancialItem : IFinancialItem
   {
     /// <summary>
     /// Id of the item
@@ -35,6 +35,9 @@ namespace FinancialMonitoring.Entities
 
     ///<inheritdoc/>
     public object Id => FinancialItemId;
+
+    ///<inheritdoc/>
+    public Guid UserId { get; set; }
 
     #region references
 

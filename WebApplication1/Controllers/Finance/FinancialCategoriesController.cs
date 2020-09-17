@@ -1,4 +1,4 @@
-﻿using FinancialMonitoring.Entities;
+﻿using FinancialMonitoring.Entities.Finance;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SpacedRepetitionSystem.WebAPI.Core;

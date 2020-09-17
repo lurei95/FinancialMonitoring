@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FinancialMonitoring.Entities
+namespace FinancialMonitoring.Entities.Finance
 {
   /// <summary>
   /// A catgory in which multiple financial items can be organized
   /// </summary>
-  public sealed class FinancialCategory : IFinancialItem, IEntity
+  public sealed class FinancialCategory : IFinancialItem
   {
     /// <summary>
     /// Id of the category
@@ -31,6 +31,9 @@ namespace FinancialMonitoring.Entities
     /// Total value of the category
     /// </summary>
     public decimal Value => Items.Sum(item => item.Value) + ChildCategories.Sum(child => child.Value);
+
+    ///<inheritdoc/>
+    public Guid UserId { get; set; }
 
     #region references
 
