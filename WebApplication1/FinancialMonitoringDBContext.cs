@@ -1,5 +1,6 @@
 ﻿using FinancialMonitoring.Entities;
 using FinancialMonitoring.Entities.Configurations;
+using FinancialMonitoring.Entities.Finance;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinancialMonitoring.API
