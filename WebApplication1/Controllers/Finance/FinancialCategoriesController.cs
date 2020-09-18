@@ -28,6 +28,8 @@ namespace FinancialMonitoring.Controllers.Finance
     {
       FinancialCategory category = await Context.Set<FinancialCategory>()
         .Include(category => category.Attachments)
+        .Include(category => category.ChildCategories)
+        .Include(category => category.Items)
         .FirstOrDefaultAsync(category => category.FinancialCategoryId == id);
 
       if (category == null)
