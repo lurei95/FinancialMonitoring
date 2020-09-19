@@ -31,7 +31,7 @@ namespace FinancialMonitoring.Entities.Finance
     /// <summary>
     /// Date when the item was due
     /// </summary>
-    public DateTime Date { get; set; }
+    public DateTime DueDate { get; set; }
 
     ///<inheritdoc/>
     public object Id => FinancialItemId;

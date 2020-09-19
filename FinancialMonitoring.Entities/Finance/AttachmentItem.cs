@@ -3,7 +3,7 @@
 namespace FinancialMonitoring.Entities
 {
   /// <summary>
-  /// An attachement to financial item or category
+  /// An attachement to a financial item or category
   /// </summary>
   public sealed class AttachmentItem : IEntity, IUserSpecificEntity
   {

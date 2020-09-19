@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\FinancialCatgegory.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FinancialMonitoring.Entities\FinancialMonitoring.Entities.csproj" />
   </ItemGroup>
 

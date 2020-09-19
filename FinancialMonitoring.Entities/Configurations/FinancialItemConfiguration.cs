@@ -29,7 +29,7 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.Property(item => item.Value)
         .IsRequired();
 
-      builder.Property(item => item.Date)
+      builder.Property(item => item.DueDate)
         .IsRequired();
 
       builder.HasMany(category => category.Attachments)
