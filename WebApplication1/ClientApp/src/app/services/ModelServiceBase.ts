@@ -1,20 +1,13 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { environment } from '../../environments/environment';
-import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { Observable, throwError } from "rxjs";
+import { catchError } from 'rxjs/operators';
 
 /**
  * Interface of a service for deleting a model
  */
 export abstract class ModelServiceBase<TModel>
 {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    }),
-    observe: 'response' as 'response'
-  };
-
   /**
    * @returns {string} The path for the corresponding model
    */
@@ -38,9 +31,7 @@ export abstract class ModelServiceBase<TModel>
    * @param {TModel} parameter Model to create
    */
   create(parameter: TModel) {
-    this._client.post(this.path, parameter, this.httpOptions).subscribe((reply) => {
-      //Error handling
-    });
+    this._client.post(this.path, parameter).pipe(catchError(this.handleError));
   }
 
   /**
@@ -49,9 +40,7 @@ export abstract class ModelServiceBase<TModel>
    * @param {TModel} parameter Model to update
    */
   update(parameter: TModel) {
-    this._client.put(this.path, parameter, this.httpOptions).subscribe((reply) => {
-      //Error handling
-    });
+    this._client.put(this.path, parameter).pipe(catchError(this.handleError));
   }
 
   /**
@@ -60,9 +49,7 @@ export abstract class ModelServiceBase<TModel>
    * @param {any} id Id of the model to delete
    */
   delete(id: string) {
-    this._client.delete(this.path + "/" + id, this.httpOptions).subscribe((reply) => {
-      //Error handling
-    });
+    this._client.delete(this.path + "/" + id).pipe(catchError(this.handleError));
   }
 
   /**
@@ -75,10 +62,7 @@ export abstract class ModelServiceBase<TModel>
     if (parameters)
       path += + '/?param=' + encodeURIComponent(JSON.stringify(parameters));
 
-    return this._client.get<TModel[]>(path, this.httpOptions).pipe(map(value => {
-      //Error handling
-      return null;
-    }));
+    return this._client.get<TModel[]>(path).pipe(catchError(this.handleError));
   }
 
   /**
@@ -87,9 +71,11 @@ export abstract class ModelServiceBase<TModel>
    * @param {any} id The id of the model
    */
   get(id: string): Observable<TModel> {
-    return this._client.get<TModel>(this.path + "/" + id, this.httpOptions).pipe(map(value => {
-      //Error handling
-      return null;
-    }));
+    return this._client.get<TModel>(this.path + "/" + id).pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 }
