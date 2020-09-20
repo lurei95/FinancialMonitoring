@@ -43,7 +43,7 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     /// </summary>
     /// <param name="searchParameters">A dictionary containing the search parameters</param>
     /// <returns>A list of entities matching the filter</returns>
-    public abstract Task<ActionResult<List<TEntity>>> GetAsync(IDictionary<string, object> searchParameters);
+    public abstract Task<ActionResult<List<TEntity>>> GetAsync([FromQuery(Name = "param")] IDictionary<string, object> searchParameters);
 
     /// <summary>
     /// Updates an existing entity
@@ -78,13 +78,13 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     /// <summary>
     /// Deletes an existing entity
     /// </summary>
-    /// <param name="entity">The entity to delete</param>
-    [HttpDelete]
-    public async Task<IActionResult> DeleteAsync([FromBody] TEntity entity)
+    /// <param name="id">The id of the entity</param>
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(TKey id)
     {
-      if (entity == null)
+      if (id.Equals(default(TKey)))
         return BadRequest();
-      IActionResult result = await DeleteCoreAsync(entity);
+      IActionResult result = await DeleteCoreAsync(id);
       await Context.SaveChangesAsync();
       return result;
     }
@@ -106,13 +106,13 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     /// <summary>
     /// Deletes an existing entity
     /// </summary>
-    /// <param name="entity">The entity to delete</param>
-    protected virtual async Task<IActionResult> DeleteCoreAsync(TEntity entity)
+    /// <param name="id">The id of the entity</param>
+    protected virtual async Task<IActionResult> DeleteCoreAsync(TKey id)
     {
-      TEntity entity1 = await Context.FindAsync<TEntity>(entity.Id);
-      if (entity1 == null)
+      TEntity entity = await Context.FindAsync<TEntity>(id);
+      if (entity == null)
         return NotFound();
-      Context.Remove(entity1);
+      Context.Remove(entity);
       return Ok();
     }
 

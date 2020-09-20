@@ -24,7 +24,8 @@ namespace FinancialMonitoring.Controllers.Finance
     { }
 
     ///<inheritdoc/>
-    public override async Task<ActionResult<FinancialCategory>> GetAsync(Guid id)
+    [HttpGet("{id}")]
+    public override async Task<ActionResult<FinancialCategory>> GetAsync([FromRoute] Guid id)
     {
       FinancialCategory category = await Context.Set<FinancialCategory>()
         .Include(category => category.Attachments)
