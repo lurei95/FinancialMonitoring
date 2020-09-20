@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinancialMonitoring.Entities\FinancialMonitoring.Entities.csproj" />
+    <ProjectReference Include="..\FinancialMonitoring.Utility\FinancialMonitoring.Utility.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
