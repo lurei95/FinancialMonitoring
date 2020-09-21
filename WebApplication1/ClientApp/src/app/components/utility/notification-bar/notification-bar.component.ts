@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../services/utility/notificationService';
 import { NotificationModel } from './../../../models/utility/notification.model';
 import { Component, OnInit } from '@angular/core';
 import { NotificationKind } from '../../../models/utility/notificationKind';
@@ -20,25 +21,26 @@ import { NotificationQuery } from '../../../store/notification.query';
 })
 export class NotificationBarComponent implements OnInit
 {
-  private alertClass: string;
+  private class: string;
 
-  private alertVisible: boolean;
+  private visible: boolean;
 
   private message: string;
 
   /**
    * Constructor
    * 
-   * @param {NotificationQuery} notificationQuery Injected: Query for @see NotificationModel related state
+   * @param {NotificationQuery} query Injected: Query for @see NotificationModel related state
+   * @param {NotificationQuery} service Injected: service for displaying notifications
    */
-  constructor(private notificationQuery: NotificationQuery) { }
+  constructor(private query: NotificationQuery, private service: NotificationService) { }
 
   /**
    * @inheritdoc
    */
   ngOnInit() 
   {
-    this.notificationQuery.selectNotification$.subscribe((notification) => 
+    this.query.selectNotification$.subscribe((notification) => 
     {
       if (notification)
         this.notifyMessage(notification);
@@ -53,33 +55,35 @@ export class NotificationBarComponent implements OnInit
     switch (notification.notificationKind)
     {
       case NotificationKind.SuccessNotification:
-        this.alertClass = "alert alert-success bottomBar";
-        this.alertVisible = true;
+        this.class = "alert alert-success bottomBar";
+        this.visible = true;
         break;
       case NotificationKind.InformationNotification:
-        this.alertClass = "alert alert-info bottomBar";
-        this.alertVisible = true;
+        this.class = "alert alert-info bottomBar";
+        this.visible = true;
         break;
       case NotificationKind.WarningNotification:
-        this.alertClass = "alert alert-warning bottomBar";
-        this.alertVisible = true;
+        this.class = "alert alert-warning bottomBar";
+        this.visible = true;
         break;
       case NotificationKind.ErrorNotification:
-        this.alertClass = "alert alert-danger bottomBar";
-        this.alertVisible = true;
+        this.class = "alert alert-danger bottomBar";
+        this.visible = true;
         break;
       default:
         this.resetNotification();
         break;
-     }
+    }
   }
+
+  private dismissNotification() { this.service.dismissNotification(); }
 
   private resetNotification()
   {
-    if (this.alertVisible)
+    if (this.visible)
     {
-      this.alertVisible = false;
-      this.alertClass = null;
+      this.visible = false;
+      this.class = null;
       this.message = null;
     }
   }

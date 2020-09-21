@@ -1,9 +1,13 @@
 import { Query } from '@datorama/akita';
 import { NotificationState, NotificationStore } from './notification.store';
+import { Injectable } from '@angular/core';
 
 /**
  * Query for @see NotificationStore
  */
+@Injectable({
+  providedIn: 'root'
+})
 export class NotificationQuery extends Query<NotificationState> 
 { 
   /**

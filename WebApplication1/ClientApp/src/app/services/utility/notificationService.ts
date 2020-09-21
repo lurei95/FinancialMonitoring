@@ -2,7 +2,6 @@ import { NotificationStore } from './../../store/notification.store';
 import { NotificationKind } from './../../models/utility/notificationKind';
 import { Injectable } from "@angular/core";
 import { NotificationModel } from '../../models/utility/notification.model';
-import { timeout } from 'rxjs/operators';
 
 /**
  * Service for displaying notification messages
@@ -10,7 +9,7 @@ import { timeout } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class NotficationService 
+export class NotificationService 
 {
   /**
    * Constructor
@@ -50,6 +49,11 @@ export class NotficationService
    */
   public notifyErrorMessage(message: string)
   { this.notifyCore(message, NotificationKind.ErrorNotification); }
+
+  /**
+   * Dismisses the current notification
+   */
+  public dismissNotification() { this.store.update({ notification: null }); }
 
   private notifyCore(message: string, notificationKind: NotificationKind)
   {
