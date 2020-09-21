@@ -1,5 +1,5 @@
 /**
- * kind of the nottification
+ * kind of the notification
  */
 export enum NotificationKind
 {

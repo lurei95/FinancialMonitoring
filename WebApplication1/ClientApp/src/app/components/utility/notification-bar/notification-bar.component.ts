@@ -1,6 +1,8 @@
+import { NotificationModel } from './../../../models/utility/notification.model';
 import { Component, OnInit } from '@angular/core';
 import { NotificationKind } from '../../../models/utility/notificationKind';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate} from '@angular/animations';
+import { NotificationQuery } from '../../../store/notification.query';
 
 /**
  * Component for a notification bar
@@ -26,19 +28,29 @@ export class NotificationBarComponent implements OnInit
 
   /**
    * Constructor
+   * 
+   * @param {NotificationQuery} notificationQuery Injected: Query for @see NotificationModel related state
    */
-  constructor() { }
+  constructor(private notificationQuery: NotificationQuery) { }
 
   /**
-   * Displays a notification in the bar
-   *
-   * @param {NotificationKind} notificationKind Kind of the notification message
-   * @param {string} message The message of the notification
+   * @inheritdoc
    */
-  public notifyMessage(notificationKind: NotificationKind, message: string)
+  ngOnInit() 
   {
-    this.message = message;
-    switch (notificationKind)
+    this.notificationQuery.selectNotification$.subscribe((notification) => 
+    {
+      if (notification)
+        this.notifyMessage(notification);
+      else
+        this.resetNotification();
+    });
+  }
+
+  private notifyMessage(notification: NotificationModel)
+  {
+    this.message = notification.message;
+    switch (notification.notificationKind)
     {
       case NotificationKind.SuccessNotification:
         this.alertClass = "alert alert-success bottomBar";
@@ -62,10 +74,7 @@ export class NotificationBarComponent implements OnInit
      }
   }
 
-  /**
-   * Resets the displayed notification
-   */
-  public resetNotification()
+  private resetNotification()
   {
     if (this.alertVisible)
     {
@@ -73,9 +82,5 @@ export class NotificationBarComponent implements OnInit
       this.alertClass = null;
       this.message = null;
     }
-  }
-
-  ngOnInit() {
-
   }
 }

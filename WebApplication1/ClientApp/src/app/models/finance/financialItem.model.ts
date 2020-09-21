@@ -1,11 +1,11 @@
-import { FinancialCategory } from "./FinancialCatgegory";
-import { AttachmentItem } from "./AttachmentItem";
+import { FinancialCategoryModel } from "./financialCatgegory.model";
+import { AttachmentItemModel } from "./attachmentItem.model";
 
 /**
  * A fiancial item
  */
-export class FinancialItem {
-
+export class FinancialItemModel
+{
   private _financialItemId: string;
   /**
    * @returns {string} The id of the item
@@ -66,23 +66,23 @@ export class FinancialItem {
    */
   set userId(value: string) { this._userId = value; }
 
-  private _category: FinancialCategory;
+  private _category: FinancialCategoryModel;
   /**
-   * @returns {FinancialCategory} The category
+   * @returns {FinancialCategoryModel} The category
    */
-  get category(): FinancialCategory { return this._category; }
+  get category(): FinancialCategoryModel { return this._category; }
   /**
-   * @param {FinancialCategory} value The  category
+   * @param {FinancialCategoryModel} value The  category
    */
-  set category(value: FinancialCategory) { this._category = value; }
+  set category(value: FinancialCategoryModel) { this._category = value; }
 
-  private _attachments: AttachmentItem[];
+  private _attachments: AttachmentItemModel[];
   /**
-   * @returns {AttachmentItem[]} The attachments to the item
+   * @returns {AttachmentItemModel[]} The attachments to the item
    */
-  get attachments(): AttachmentItem[] { return this._attachments; }
+  get attachments(): AttachmentItemModel[] { return this._attachments; }
   /**
-   * @param {AttachmentItem[]} value The attachments to the item
+   * @param {AttachmentItemModel[]} value The attachments to the item
    */
-  set attachments(value: AttachmentItem[]) { this._attachments = value; }
+  set attachments(value: AttachmentItemModel[]) { this._attachments = value; }
 }

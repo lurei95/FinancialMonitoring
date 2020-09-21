@@ -1,8 +1,9 @@
 /**
  * An attachement to a financial item or category
  */
-export class AttachmentItem {
-  private _attachmentItemId;
+export class AttachmentItemModel
+{
+  private _attachmentItemId: string;
   /**
    * @returns {string} The id of the attachment
    */
@@ -42,7 +43,7 @@ export class AttachmentItem {
    */
   set addedDate(value: Date) { this._addedDate = value; }
 
-  private _parentId;
+  private _parentId: string;
   /**
    * @returns {string} The id of the parent entity
    */
@@ -52,7 +53,7 @@ export class AttachmentItem {
    */
   set parentId(value: string) { this._parentId = value; }
 
-  private _userId;
+  private _userId: string;
   /**
    * @returns {string} The id of the user
    */
