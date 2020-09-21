@@ -1,0 +1,9 @@
+<div *ngIf="allertVisible"
+     [className]="alertClass"
+     [@simpleFadeAnimation]="'in'"
+     role="alert">
+  {{message}}
+  <button type="button" class="close" (click)="resetNotification">
+    <span>&times;</span>
+  </button>
+</div>
