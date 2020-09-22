@@ -1,7 +1,7 @@
-import { NotificationStore } from './../../store/notification.store';
 import { NotificationKind } from './../../models/utility/notificationKind';
 import { Injectable } from "@angular/core";
 import { NotificationModel } from '../../models/utility/notification.model';
+import { NotificationStore } from '../../store/utility/notification.store';
 
 /**
  * Service for displaying notification messages

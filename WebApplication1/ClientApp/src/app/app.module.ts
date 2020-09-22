@@ -1,4 +1,3 @@
-import { NotificationStore } from './store/notification.store';
 import { NotificationService } from './services/utility/notificationService';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -9,8 +8,11 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotificationBarComponent } from './components/utility/notification-bar/notification-bar.component';
-import { NotificationQuery } from './store/notification.query';
+import { NotificationQuery } from './store/utility/notification.query';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationStore } from './store/utility/notification.store';
+import { UserQuery } from './store/security/user.query';
+import { UserStore } from './store/security/user.store';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ]),
   ],
-  providers: [NotificationService, NotificationQuery, NotificationStore],
+  providers: [NotificationService, NotificationQuery, NotificationStore, UserQuery, UserStore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import { NotificationModel } from './../../../models/utility/notification.model'
 import { Component, OnInit } from '@angular/core';
 import { NotificationKind } from '../../../models/utility/notificationKind';
 import { trigger, state, style, transition, animate} from '@angular/animations';
-import { NotificationQuery } from '../../../store/notification.query';
+import { NotificationQuery } from '../../../store/utility/notification.query';
 
 /**
  * Component for a notification bar

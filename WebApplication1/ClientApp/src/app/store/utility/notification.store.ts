@@ -1,6 +1,6 @@
-import { NotificationModel } from './../models/utility/notification.model';
 import { Injectable } from '@angular/core';
 import { StoreConfig, Store} from '@datorama/akita';
+import { NotificationModel } from '../../models/utility/notification.model';
 
 /**
  * State of the current notification
