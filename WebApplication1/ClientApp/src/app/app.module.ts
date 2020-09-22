@@ -1,3 +1,4 @@
+import { ApiService } from './services/utility/api.service';
 import { AuthenticationService } from './services/security/authentication.service';
 import { NotificationService } from './services/utility/notification.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +32,15 @@ import { UserStore } from './store/security/user.store';
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ]),
   ],
-  providers: [NotificationService, NotificationQuery, NotificationStore, UserQuery, UserStore, AuthenticationService],
+  providers: [
+    NotificationService, 
+    NotificationQuery,
+    NotificationStore, 
+    UserQuery, 
+    UserStore, 
+    AuthenticationService, 
+    ApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

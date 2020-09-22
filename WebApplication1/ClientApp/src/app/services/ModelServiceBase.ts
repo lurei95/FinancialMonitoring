@@ -1,8 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { ApiService } from './utility/api.service';
 import { environment } from '../../environments/environment';
-import { Observable, throwError } from "rxjs";
-import { catchError, switchMap } from 'rxjs/operators';
-import { AuthenticationService } from "./security/authentication.service";
+import { Observable } from "rxjs";
 
 /**
  * Interface of a service for deleting a model
@@ -12,50 +10,48 @@ export abstract class ModelServiceBase<TModel>
   /**
    * @returns {string} The path for the corresponding model
    */
-  protected abstract get modelPath(): string;
-
-  /**
-   * @returns {string} The full api path
-   */
-  protected get path(): string { return environment.apiEndpoint + this.modelPath; }
+  protected abstract get path(): string;
 
   /**
    * Constructor
    * 
-   * @param {HttpClient} client Injected: The http client
-   * @param {AuthenticationService} authenticationService Injected: Service for authentication
+   * @param {ApiService} apiService Injected: The service for making api calls
    */
-  constructor(protected client: HttpClient, private authenticationService: AuthenticationService) 
+  constructor(protected apiService: ApiService) 
   { }
 
   /**
    * Creates the model
    * 
    * @param {TModel} parameter Model to create
+   * @returns {Observable<unknown>} Oberservable for the result of the api call
    */
-  create(parameter: TModel) 
-  { this.sendRequest((options) => this.client.post(this.path, parameter, options)); }
+  create(parameter: TModel): Observable<unknown> 
+  { return this.apiService.post(this.path, parameter); }
 
   /**
    * Updates the model
    * 
    * @param {TModel} parameter Model to update
+   * @returns {Observable<unknown>} Oberservable for the result of the api call
    */
-  update(parameter: TModel) 
-  { this.sendRequest((options) => this.client.put(this.path, parameter, options)); }
+  update(parameter: TModel): Observable<unknown> 
+  { return this.apiService.put(this.path, parameter); }
 
   /**
    * Deletes the model
    * 
    * @param {any} id Id of the model to delete
+   * @returns {Observable<unknown>} Oberservable for the result of the api call
    */
-  delete(id: string) 
-  { this.sendRequest((options) => this.client.delete(this.path + "/" + id, options)); }
+  delete(id: string): Observable<unknown>
+  { return this.apiService.delete(this.path + "/" + id); }
 
   /**
    * Retrieves all exisiting models
    * 
    * @param {[{ name: string, value: Object }]} parameters The search parameters
+   * @returns {Observable<TModel[]>} Oberservable for the list of models
    */
   retrieve(parameters: [{ name: string, value: Object }] = null): Observable<TModel[]> 
   {
@@ -63,38 +59,15 @@ export abstract class ModelServiceBase<TModel>
     if (parameters)
       path += + '/?param=' + encodeURIComponent(JSON.stringify(parameters));
 
-    return this.sendRequest<TModel[]>((options) => this.client.get<TModel[]>(path, options));
+    return this.apiService.get<TModel[]>(path);
   }
 
   /**
    * Retrieves the model
    * 
    * @param {any} id The id of the model
+   * @returns {Observable<TModel>} Oberservable for the model
    */
   get(id: string): Observable<TModel> 
-  {
-    return this.sendRequest<TModel>(
-      (options) => this.client.get<TModel>(this.path + "/" + id, options));
-  }
-
-  private sendRequest<TResult>(httpCall: (options: { headers: HttpHeaders }) => Observable<TResult>)
-    : Observable<TResult> 
-  {
-    return this.authenticationService.accessToken$.pipe(
-      switchMap(token => httpCall(this.getOptions(token))),
-      catchError(this.handleError)
-    );
-  }
-
-  private getOptions(accessToken: string): { headers: HttpHeaders }
-  {
-    return { 
-      headers: new HttpHeaders().set('Authorization',  `Bearer ${accessToken}`) 
-    };
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    return throwError(
-      'Something bad happened; please try again later.');
-  }
+  { return this.apiService.get<TModel>(this.path + "/" + id); }
 }
