@@ -1,4 +1,5 @@
-import { NotificationService } from './services/utility/notificationService';
+import { AuthenticationService } from './services/security/authentication.service';
+import { NotificationService } from './services/utility/notification.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ import { UserStore } from './store/security/user.store';
       { path: '', component: HomeComponent, pathMatch: 'full' }
     ]),
   ],
-  providers: [NotificationService, NotificationQuery, NotificationStore, UserQuery, UserStore],
+  providers: [NotificationService, NotificationQuery, NotificationStore, UserQuery, UserStore, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

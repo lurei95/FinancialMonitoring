@@ -1,9 +1,9 @@
-import { NotificationService } from './../../../services/utility/notificationService';
 import { NotificationModel } from './../../../models/utility/notification.model';
 import { Component, OnInit } from '@angular/core';
 import { NotificationKind } from '../../../models/utility/notificationKind';
 import { trigger, state, style, transition, animate} from '@angular/animations';
 import { NotificationQuery } from '../../../store/utility/notification.query';
+import { NotificationService } from '../../../services/utility/notification.service';
 
 /**
  * Component for a notification bar

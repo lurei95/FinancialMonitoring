@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import { Observable, throwError } from "rxjs";
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
+import { AuthenticationService } from "./security/authentication.service";
 
 /**
  * Interface of a service for deleting a model
@@ -21,48 +22,48 @@ export abstract class ModelServiceBase<TModel>
   /**
    * Constructor
    * 
-   * @param {HttpClient} _client Injected: The http client
+   * @param {HttpClient} client Injected: The http client
+   * @param {AuthenticationService} authenticationService Injected: Service for authentication
    */
-  constructor(private _client: HttpClient) { }
+  constructor(protected client: HttpClient, private authenticationService: AuthenticationService) 
+  { }
 
   /**
    * Creates the model
    * 
    * @param {TModel} parameter Model to create
    */
-  create(parameter: TModel) {
-    this._client.post(this.path, parameter).pipe(catchError(this.handleError));
-  }
+  create(parameter: TModel) 
+  { this.sendRequest((options) => this.client.post(this.path, parameter, options)); }
 
   /**
    * Updates the model
    * 
    * @param {TModel} parameter Model to update
    */
-  update(parameter: TModel) {
-    this._client.put(this.path, parameter).pipe(catchError(this.handleError));
-  }
+  update(parameter: TModel) 
+  { this.sendRequest((options) => this.client.put(this.path, parameter, options)); }
 
   /**
    * Deletes the model
    * 
    * @param {any} id Id of the model to delete
    */
-  delete(id: string) {
-    this._client.delete(this.path + "/" + id).pipe(catchError(this.handleError));
-  }
+  delete(id: string) 
+  { this.sendRequest((options) => this.client.delete(this.path + "/" + id, options)); }
 
   /**
    * Retrieves all exisiting models
    * 
    * @param {[{ name: string, value: Object }]} parameters The search parameters
    */
-  retrieve(parameters: [{ name: string, value: Object }] = null): Observable<TModel[]> {
+  retrieve(parameters: [{ name: string, value: Object }] = null): Observable<TModel[]> 
+  {
     let path: string = this.path;
     if (parameters)
       path += + '/?param=' + encodeURIComponent(JSON.stringify(parameters));
 
-    return this._client.get<TModel[]>(path).pipe(catchError(this.handleError));
+    return this.sendRequest<TModel[]>((options) => this.client.get<TModel[]>(path, options));
   }
 
   /**
@@ -70,8 +71,26 @@ export abstract class ModelServiceBase<TModel>
    * 
    * @param {any} id The id of the model
    */
-  get(id: string): Observable<TModel> {
-    return this._client.get<TModel>(this.path + "/" + id).pipe(catchError(this.handleError));
+  get(id: string): Observable<TModel> 
+  {
+    return this.sendRequest<TModel>(
+      (options) => this.client.get<TModel>(this.path + "/" + id, options));
+  }
+
+  private sendRequest<TResult>(httpCall: (options: { headers: HttpHeaders }) => Observable<TResult>)
+    : Observable<TResult> 
+  {
+    return this.authenticationService.accessToken$.pipe(
+      switchMap(token => httpCall(this.getOptions(token))),
+      catchError(this.handleError)
+    );
+  }
+
+  private getOptions(accessToken: string): { headers: HttpHeaders }
+  {
+    return { 
+      headers: new HttpHeaders().set('Authorization',  `Bearer ${accessToken}`) 
+    };
   }
 
   private handleError(error: HttpErrorResponse) {
