@@ -3,7 +3,7 @@ import { AuthenticationService } from './services/security/authentication.servic
 import { NotificationService } from './services/utility/notification.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -17,22 +17,29 @@ import { UserStore } from './store/security/user.store';
 import { HomeComponent } from './components/views/home/home.component';
 import { LoginGuard } from './services/security/loginGuard';
 import { ApplicationGuard } from './services/security/applicationGuard';
+import { LoginComponent } from './components/views/authentication/login/login.component';
+import { SignupComponent } from './components/views/authentication/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    NotificationBarComponent
+    NotificationBarComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, canActivate: [ApplicationGuard] },
+      { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+      { path: 'signup', component: SignupComponent, canActivate: [LoginGuard] },
       { path: '**', redirectTo: '/home', pathMatch: 'full' },
     ]),
   ],

@@ -28,7 +28,7 @@ export class LoginGuard implements CanActivate
   {
     return this.authenticationService.accessToken$.pipe(map(token => 
     {
-      if (token)
+      if (!token)
         return true;
       else 
         return this.router.parseUrl('/home');
