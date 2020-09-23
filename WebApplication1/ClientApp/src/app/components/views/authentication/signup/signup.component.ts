@@ -4,6 +4,7 @@ import { AuthenticationComponent } from '../authentication.component';
 import { AuthenticationService } from '../../../../services/security/authentication.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserModel } from '../../../../models/security/user.model';
 
 /**
  * Component for singup dialog
@@ -37,6 +38,9 @@ export class SignupComponent extends AuthenticationComponent
    */
   protected SubmitCore(param: any): Observable<{ successfull: boolean; message: string; }> 
   {
-    throw new Error("Method not implemented.");
+    let user: UserModel;
+    user.email = param.email;
+    user.password = param.password;
+    return this.authenticationService.login(user);
   }
 }

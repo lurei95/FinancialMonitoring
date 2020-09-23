@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthenticationComponent } from '../authentication.component';
 import { Observable } from 'rxjs';
+import { UserModel } from '../../../../models/security/user.model';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,9 @@ export class LoginComponent extends AuthenticationComponent
    */
   protected SubmitCore(param: any): Observable<{ successfull: boolean, message: string }>
   {
-    throw new Error("Method not implemented.");
+    let user: UserModel;
+    user.email = param.email;
+    user.password = param.password;
+    return this.authenticationService.login(user);
   }
 }

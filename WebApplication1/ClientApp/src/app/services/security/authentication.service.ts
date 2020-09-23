@@ -1,11 +1,11 @@
+import { HttpClient } from '@angular/common/http';
+import { UserModel } from './../../models/security/user.model';
 import { environment } from './../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { UserStore } from '../../store/security/user.store';
 import { RefreshRequest } from '../../models/security/refreshRequest.model';
 import { UserQuery } from '../../store/security/user.query';
-import { UserModel } from '../../models/security/user.model';
 import { Injectable } from "@angular/core";
-import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 
 /**
@@ -33,12 +33,38 @@ export class AuthenticationService
   /**
    * Constructor
    * 
-   * @param {HttpClient} client Injected: The http client
+   * @param {HttpClient} client Injected: Httpclient
    * @param {UserStore} store Injected: User store
    * @param {UserQuery} query Injected: User query
    */
   constructor(private client: HttpClient, private store: UserStore, query: UserQuery) 
   { query.selectUser$.subscribe(user => this._currentUser = user); }
+
+  /**
+   * Tries to log the user in
+   * 
+   * @param {UserModel} user the user
+   */
+  public login(user: UserModel) : Observable<{ successfull: boolean, message: string}>
+  {
+    return this.client.post<UserModel>(environment.apiEndpoint + "Users/Login", user).pipe(
+      tap(user => this.store.update({ user: user })),
+      map(user => { return { successfull: true, message: null }})
+    );
+  }
+
+  /**
+   * Tries to sign the user up
+   * 
+   * @param {UserModel} user the user
+   */
+  public signup(user: UserModel) : Observable<{ successfull: boolean, message: string}>
+  {
+    return this.client.post<UserModel>(environment.apiEndpoint + "Users/Signup", user).pipe(
+      tap(user => this.store.update({ user: user })),
+      map(user => { return { successfull: true, message: null }})
+    );
+  }
 
   private refreshAccessToken() : Observable<string>
   {
