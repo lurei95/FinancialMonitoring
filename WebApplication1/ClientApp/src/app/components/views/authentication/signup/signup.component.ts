@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../../../services/security/authenticat
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserModel } from '../../../../models/security/user.model';
+import { ApiReply } from 'src/app/models/utility/apiReply';
 
 /**
  * Component for singup dialog
@@ -36,7 +37,7 @@ export class SignupComponent extends AuthenticationComponent
   /**
    * @inheritdoc
    */
-  protected SubmitCore(param: any): Observable<{ successfull: boolean; message: string; }> 
+  protected SubmitCore(param: any): Observable<ApiReply<UserModel>> 
   {
     let user: UserModel;
     user.email = param.email;

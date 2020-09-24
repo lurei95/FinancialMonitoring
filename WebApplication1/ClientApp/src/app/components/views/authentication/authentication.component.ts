@@ -1,7 +1,9 @@
+import { ApiReply } from './../../../models/utility/apiReply';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './../../../services/security/authentication.service';
 import { FormGroup} from '@angular/forms';
+import { UserModel } from 'src/app/models/security/user.model';
 
 /**
  * Baseclass for an authentication component
@@ -37,7 +39,7 @@ export abstract class AuthenticationComponent
   {
     this.SubmitCore(formData).subscribe(result => 
     {
-      if (result.successfull)
+      if (result.successful)
         this.router.navigateByUrl("/home");
       else
         this._error = result.message;
@@ -48,7 +50,7 @@ export abstract class AuthenticationComponent
    * The authentication action performed on submit
    * 
    * @param {any} formData The form data
-   * @returns {Observable<{ successfull: boolean, message: string }>} The authentication result
+   * @returns {Observable<ApiReply<UserModel>>} The authentication result
    */
-  protected abstract SubmitCore(param: any): Observable<{ successfull: boolean, message: string }>
+  protected abstract SubmitCore(param: any): Observable<ApiReply<UserModel>>
 }

@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { AuthenticationComponent } from '../authentication.component';
 import { Observable } from 'rxjs';
 import { UserModel } from '../../../../models/security/user.model';
+import { ApiReply } from 'src/app/models/utility/apiReply';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent extends AuthenticationComponent
   /**
    * @inheritdoc
    */
-  protected SubmitCore(param: any): Observable<{ successfull: boolean, message: string }>
+  protected SubmitCore(param: any): Observable<ApiReply<UserModel>>
   {
     let user: UserModel;
     user.email = param.email;

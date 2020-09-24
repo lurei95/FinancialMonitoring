@@ -1,9 +1,9 @@
 import { environment } from './../../../environments/environment';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
-import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
-import { catchError, switchMap } from 'rxjs/operators';
-import { AuthenticationService } from '../security/authentication.service';
+import { HttpHeaders, HttpClient,  HttpResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { ApiReply } from 'src/app/models/utility/apiReply';
 
 /**
  * Service for making calls to the api
@@ -14,31 +14,38 @@ import { AuthenticationService } from '../security/authentication.service';
 export class ApiService 
 {
   /**
+   * Constructor
    * 
    * @param {HttpClient} client Injected: The http client
-   * @param {AuthenticationService} authenticationService Injected: Service for authentication
    */
-  constructor(private client: HttpClient, private authenticationService: AuthenticationService)
+  constructor(private client: HttpClient)
   { }
-
-  /**
-   * Returns the complete url for the api call
-   * 
-   * @param {string} path The path from the base url
-   * @returns {string} The complete url for the api call
-   */
-  public getUrl(path: string): string { return environment.apiEndpoint + path; }
 
   /**
    * Sends a get request to the api
    * 
    * @param {string} path The path from the base url
-   * @returns {Observable<TResult>} The result of the api call
+   * @param {HttpHeaders} HttpHeaders The http headers
+   * @returns {Observable<ApiReply<TResult>>} The result of the api call
    */
-  public get<TResult>(path: string): Observable<TResult> 
+  public get<TResult>(path: string, headers?: HttpHeaders): Observable<ApiReply<TResult>> 
   {
-    return this.sendRequest<TResult>(
-      (options) => this.client.delete<TResult>(this.getUrl(path), options));
+    return this.client.delete<string>(this.getUrl(path), { observe: 'response', headers: headers })
+      .pipe(map(reply => this.handleReply(reply)));
+  }
+
+  /**
+   * Sends a put request to the api
+   * 
+   * @param {string} path The path from the base surl
+   * @param {any} parameter The parameter that is send in the request body
+   * @param {HttpHeaders} HttpHeaders The http headers
+   * @returns {Observable<ApiReply<TResult>>} The result of the api call
+   */
+  public put<TResult>(path: string, parameter: any, headers?: HttpHeaders): Observable<ApiReply<TResult>> 
+  {
+    return this.client.put<string>(this.getUrl(path), parameter, { observe: 'response', headers: headers })
+      .pipe(map(reply => this.handleReply(reply)));
   }
 
   /**
@@ -46,63 +53,37 @@ export class ApiService
    * 
    * @param {string} path The path from the base url
    * @param {any} parameter The parameter that is send in the request body
-   * @returns {Observable<TResult>} The result of the api call
+   * @param {HttpHeaders} HttpHeaders The http headers
+   * @returns {Observable<ApiReply<TResult>>} The result of the api call
    */
-  public put<TResult>(path: string, parameter: any): Observable<TResult> 
+  public post<TResult>(path: string, parameter: any, headers?: HttpHeaders): Observable<ApiReply<TResult>> 
   {
-    const url = this.getUrl(path)
-    if (parameter)
-      return this.sendRequest<TResult>((options) => this.client.put<TResult>(url, parameter, options));
-    else
-      return this.sendRequest<TResult>((options) => this.client.put<TResult>(url, options));
-  }
-
-  /**
-   * Sends a put request to the api
-   * 
-   * @param {string} path The path from the base url
-   * @param {any} parameter The parameter that is send in the request body
-   * @returns {Observable<TResult>} The result of the api call
-   */
-  public post<TResult>(path: string, parameter: any): Observable<TResult> 
-  {
-    const url = this.getUrl(path)
-    if (parameter)
-      return this.sendRequest<TResult>((options) => this.client.post<TResult>(this.getUrl(path), parameter, options));
-    else
-      return this.sendRequest<TResult>((options) => this.client.post<TResult>(this.getUrl(path), options));
+    return this.client.post<string>(this.getUrl(path), parameter, { observe: 'response', headers: headers })
+      .pipe(map(reply => this.handleReply(reply)));
   }
 
   /**
    * Sends a delete request to the api
    * 
    * @param {string} path The path from the base url
-   * @returns {Observable<TResult>} The result of the api call
+   * @param {HttpHeaders} HttpHeaders The http headers
+   * @returns {Observable<ApiReply<TResult>>} The result of the api call
    */
-  public delete<TResult>(path: string): Observable<TResult> 
+  public delete<TResult>(path: string, headers?: HttpHeaders): Observable<ApiReply<TResult>> 
   {
-    return this.sendRequest<TResult>(
-      (options) => this.client.delete<TResult>(this.getUrl(path), options));
+    return this.client.delete<string>(this.getUrl(path), { observe: 'response', headers: headers })
+      .pipe(map(reply => this.handleReply(reply)));
   }
 
-  private sendRequest<TResult>(httpCall: (options: { headers: HttpHeaders }) => Observable<TResult>)
-  : Observable<TResult> 
+  private handleReply<TResult>(response: HttpResponse<string>) : ApiReply<TResult> 
   {
-    return this.authenticationService.accessToken$.pipe(
-      switchMap(token => httpCall(this.getOptions(token))),
-      catchError(this.handleError)
-    );
+    //Internal Server error
+    if (response.status == 500)
+      return new ApiReply(null, false, response.body);
+    if(response.ok)
+      return new ApiReply(JSON.parse(response.body), true, null);
+    throw new Error(response.body);
   }
-
-  private getOptions(accessToken: string): { headers: HttpHeaders }
-  {
-    if (accessToken)
-      return { headers: new HttpHeaders().set('Authorization',  `Bearer ${accessToken}`) };
-    return null;
-  }
-
-  private handleError(error: HttpErrorResponse) 
-  {
-    return throwError('Something bad happened; please try again later.');
-  }
+  
+  private getUrl(path: string): string { return environment.apiEndpoint + path; }
 }
