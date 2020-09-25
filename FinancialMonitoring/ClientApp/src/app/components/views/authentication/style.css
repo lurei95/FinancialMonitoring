@@ -4,3 +4,16 @@
   border-radius: .25rem;
   padding: 2.5rem;
 }
+
+.invalid {
+  border: 2px solid #f57c8e; /* red */
+}
+
+.invalid::placeholder {
+  color: red;
+}
+
+.error-div {
+  padding: 0.5em;
+  padding-left: 0.75em;
+}

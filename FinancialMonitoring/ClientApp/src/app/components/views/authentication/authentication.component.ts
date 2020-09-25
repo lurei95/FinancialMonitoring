@@ -2,7 +2,7 @@ import { ApiReply } from './../../../models/utility/apiReply';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from './../../../services/security/authentication.service';
-import { FormGroup} from '@angular/forms';
+import { FormControl, FormGroup} from '@angular/forms';
 import { UserModel } from 'src/app/models/security/user.model';
 
 /**
@@ -10,11 +10,47 @@ import { UserModel } from 'src/app/models/security/user.model';
  */
 export abstract class AuthenticationComponent 
 {
-  private _error: string;
+  private _apiError: string;
+
   /**
-   * @returns The errror
+   * @returns {FormControl} Email input
    */
-  get error(): string { return this._error; }
+  protected get email(): FormControl { return this.form.get('email') as FormControl; }
+
+  /**
+   * @returns {FormControl} password input
+   */
+  protected get password(): FormControl  { return this.form.get('password') as FormControl; }
+
+  /**
+   * @returns {FormControl} The error
+   */
+  protected get error(): string 
+  {
+    if (this._apiError)
+      return this._apiError;
+    if (this.email.errors)
+    {
+      if (this.email.errors.required)
+        return "Email is required.";
+      if (this.email.errors.email)
+        return "Email needs to be a valid email.";
+    }  
+    if (this.password.errors && this.password.errors.required)
+      return "Password is required.";
+  }
+
+  /**
+   * @returns {boolean} If email has an error
+   */
+  protected get hasEmailError(): boolean 
+  { return this.email.invalid && (this.email.dirty || this.email.touched); }
+
+  /**
+   * @returns {boolean} If password has an error
+   */
+  protected get hasPasswordError(): boolean 
+  { return this.password.invalid && (this.password.dirty || this.password.touched) }
 
   /**
    * The FormGroup for the authentication form
@@ -39,10 +75,11 @@ export abstract class AuthenticationComponent
   {
     this.submitCore(formData).subscribe(result => 
     {
+      this.validateAllFormFields(this.form);
       if (result.successful)
         this.router.navigateByUrl("/home");
       else
-        this._error = result.message;
+        this._apiError = result.message;
     })
   }
 
@@ -53,4 +90,16 @@ export abstract class AuthenticationComponent
    * @returns {Observable<ApiReply<UserModel>>} The authentication result
    */
   protected abstract submitCore(param: any): Observable<ApiReply<UserModel>>
+
+  private validateAllFormFields(formGroup: FormGroup) 
+  {      
+    Object.keys(formGroup.controls).forEach(field => 
+    { 
+      const control = formGroup.get(field);     
+      if (control instanceof FormControl)
+        control.markAsTouched({ onlySelf: true });
+      else if (control instanceof FormGroup)
+        this.validateAllFormFields(control); 
+    });
+  }
 }
