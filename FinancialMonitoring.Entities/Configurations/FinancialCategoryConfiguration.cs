@@ -28,7 +28,7 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.HasMany(category => category.ChildCategories)
         .WithOne(category => category.Parent)
         .HasForeignKey(item => item.ParentId)
-        .OnDelete(DeleteBehavior.Cascade);
+        .OnDelete(DeleteBehavior.NoAction);
 
       builder.HasMany(category => category.Items)
         .WithOne(item => item.Category)
@@ -37,7 +37,12 @@ namespace FinancialMonitoring.Entities.Configurations
 
       builder.HasMany(category => category.Attachments)
         .WithOne()
-        .HasForeignKey(field => field.ParentId)
+        .HasForeignKey(field => field.FinancialCategoryId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+      builder.HasOne(item => item.User)
+        .WithMany()
+        .HasForeignKey(item => item.UserId)
         .OnDelete(DeleteBehavior.Cascade);
     }
   }

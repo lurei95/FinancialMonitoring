@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinancialMonitoring.Entities.Security;
+using System;
 
 namespace FinancialMonitoring.Entities
 {
@@ -13,9 +14,14 @@ namespace FinancialMonitoring.Entities
     public long AttachmentItemId { get; set; }
 
     /// <summary>
-    /// Id of the parent entity
+    /// Id of the parent financial Item
     /// </summary>
-    public Guid ParentId { get; set; }
+    public Guid? FinancialItemId { get; set; }
+
+    /// <summary>
+    /// Id of the parent financial category
+    /// </summary>
+    public Guid? FinancialCategoryId { get; set; }
 
     /// <summary>
     /// Title of the attachement
@@ -37,5 +43,14 @@ namespace FinancialMonitoring.Entities
 
     ///<inheritdoc/>
     public Guid UserId { get; set; }
+
+    #region references
+    
+    /// <summary>
+    /// The user
+    /// </summary>
+    public User User { get; set; }
+
+    #endregion
   }
 }

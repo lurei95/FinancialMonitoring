@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FinancialMonitoring.Entities.Security;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,16 +14,19 @@ namespace FinancialMonitoring.Entities.Finance
     /// <summary>
     /// Id of the category
     /// </summary>
+    [JsonProperty("_financialCategoryId")]
     public Guid FinancialCategoryId { get; set; }
 
     /// <summary>
     /// The title of the category
     /// </summary>
+    [JsonProperty("_title")]
     public string Title { get; set; }
 
     /// <summary>
     /// Id of the parent category
     /// </summary>
+    [JsonProperty("_parentId")]
     public Guid? ParentId { get; set; }
 
     ///<inheritdoc/>
@@ -36,6 +41,11 @@ namespace FinancialMonitoring.Entities.Finance
     public Guid UserId { get; set; }
 
     #region references
+
+    /// <summary>
+    /// The user
+    /// </summary>
+    public User User { get; set; }
 
     /// <summary>
     /// The parent category

@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.Entities", "FinancialMonitoring.Entities\FinancialMonitoring.Entities.csproj", "{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring", "WebApplication1\FinancialMonitoring.csproj", "{CFEF15EA-B919-462F-9325-E992F3F39719}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring", "FinancialMonitoring\FinancialMonitoring.csproj", "{CFEF15EA-B919-462F-9325-E992F3F39719}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialMonitoring.Utility", "FinancialMonitoring.Utility\FinancialMonitoring.Utility.csproj", "{24231C4D-9670-4646-BC11-9D704C07D014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.Utility", "FinancialMonitoring.Utility\FinancialMonitoring.Utility.csproj", "{24231C4D-9670-4646-BC11-9D704C07D014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

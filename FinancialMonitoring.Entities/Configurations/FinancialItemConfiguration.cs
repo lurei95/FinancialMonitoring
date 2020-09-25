@@ -32,11 +32,15 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.Property(item => item.DueDate)
         .IsRequired();
 
-      builder.HasMany(category => category.Attachments)
+      builder.HasMany(item => item.Attachments)
         .WithOne()
-        .HasForeignKey(field => field.ParentId)
-        .OnDelete(DeleteBehavior.Cascade);
+        .HasForeignKey(attachment => attachment.FinancialItemId)
+        .OnDelete(DeleteBehavior.NoAction);
 
+      builder.HasOne(item => item.User)
+        .WithMany()
+        .HasForeignKey(item => item.UserId)
+        .OnDelete(DeleteBehavior.NoAction);
     }
   }
 }

@@ -15,7 +15,7 @@ namespace FinancialMonitoring.Entities.Configurations
     /// <param name="builder">The builder</param>
     public void Configure(EntityTypeBuilder<AttachmentItem> builder)
     {
-      builder.ToTable("FinancialItems", "Finance");
+      builder.ToTable("AttachmentItems", "Finance");
       builder.HasKey(item => item.AttachmentItemId);
 
       builder.Property(item => item.AttachmentItemId)
@@ -28,6 +28,11 @@ namespace FinancialMonitoring.Entities.Configurations
 
       builder.Property(item => item.AddedDate)
         .IsRequired();
+
+      builder.HasOne(item => item.User)
+        .WithMany()
+        .HasForeignKey(item => item.UserId)
+        .OnDelete(DeleteBehavior.NoAction);
     }
   }
 }
