@@ -1,0 +1,13 @@
+.spinner-container {
+  margin: auto auto;
+}
+
+.spinner {
+  width: 7rem;
+  height: 7rem;
+}
+
+:host {
+  display: flex;
+  flex-grow: 1
+}

@@ -20,6 +20,7 @@ import { ApplicationGuard } from './services/security/applicationGuard';
 import { LoginComponent } from './components/views/authentication/login/login.component';
 import { SignupComponent } from './components/views/authentication/signup/signup.component';
 import {MatButtonModule} from '@angular/material/button';
+import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatButtonModule} from '@angular/material/button';
     HomeComponent,
     NotificationBarComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    WaitSpinnerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,28 +1,30 @@
-<div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <div class="authentication-container">
-      <div>
-        <h3 style="font-weight:bold; color:#343a40">Login</h3>
-      </div>
-      <br/>
-      <div class="col-12 row">
-        <input placeholder="email" id="email" type="text" formControlName="email"
-          [className]="hasEmailError ? 'form-control col-12 invalid' : 'form-control col-12'">
-      </div>
-      <br/>
-      <div class="col-12 row">
-        <input placeholder="password" id="password" formControlName="password" type="password"
-          [className]="hasPasswordError ? 'form-control col-12 invalid' : 'form-control col-12'">
-      </div>
-      <br/>
-      <div class="col-12 row d-flex align-items-center">
-        <div *ngIf="apiError || hasEmailError || hasPasswordError" class="error-div col-12 alert alert-danger">
-          {{error}}
+<app-wait-spinner [show]="isAuthenticating">
+  <div class="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+      <div class="authentication-container">
+        <div>
+          <h3 style="font-weight:bold; color:#343a40">Login</h3>
         </div>
-        <span class="col-12"></span>
-        <input type="submit" class="form-control col-6 btn btn-primary" value="Login"/>
-        <a href="/signup" class="col">Signup</a>
+        <br/>
+        <div class="col-12 row">
+          <input placeholder="email" id="email" type="text" formControlName="email"
+            [className]="hasEmailError ? 'form-control col-12 invalid' : 'form-control col-12'">
+        </div>
+        <br/>
+        <div class="col-12 row">
+          <input placeholder="password" id="password" formControlName="password" type="password"
+            [className]="hasPasswordError ? 'form-control col-12 invalid' : 'form-control col-12'">
+        </div>
+        <br/>
+        <div class="col-12 row d-flex align-items-center">
+          <div *ngIf="apiError || hasEmailError || hasPasswordError" class="error-div col-12 alert alert-danger">
+            {{error}}
+          </div>
+          <span class="col-12"></span>
+          <input type="submit" class="form-control col-6 btn btn-primary" value="Login"/>
+          <a href="/signup" class="col">Signup</a>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
+</app-wait-spinner>

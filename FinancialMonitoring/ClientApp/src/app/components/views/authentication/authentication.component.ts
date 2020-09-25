@@ -12,6 +12,12 @@ export abstract class AuthenticationComponent
 {
   private _apiError: string;
 
+  protected _isAuthenticating: boolean
+  /**
+   * @returns {boolean} Whether the authentication is processed
+   */
+  protected get isAuthenticating(): boolean { return this._isAuthenticating; } 
+
   /**
    * @returns {FormControl} Email input
    */
@@ -73,6 +79,7 @@ export abstract class AuthenticationComponent
    */
   public onSubmit(formData: any) 
   {
+    this._isAuthenticating = true;
     this.submitCore(formData).subscribe(result => 
     {
       this.validateAllFormFields(this.form);
@@ -80,6 +87,7 @@ export abstract class AuthenticationComponent
         this.router.navigateByUrl("/home");
       else
         this._apiError = result.message;
+      this._isAuthenticating = false;
     })
   }
 
