@@ -1,0 +1,41 @@
+#container {
+  border-left: 8px solid red;
+  border-right: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  height: 60vh;
+  width: 60vw;
+}
+
+.expanded {
+  height: 100vh!important;
+  width: 100vw!important;
+}
+
+#content, .cdk-overlay-pane {
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+}
+
+#closeButton, #expandButton {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  padding: 5px 10px;
+  height: 30px;
+}
+
+mat-dialog-content {
+  height: 100%;
+  width: 100%;
+  margin: 0px; 
+  padding: 0px;
+}
+
+.fa-times {
+  color: red;
+}
+
+.fa-expand {
+  color: var(--themeDarkGray);
+}

@@ -1,0 +1,25 @@
+<mat-dialog-content id=content class="mat-typography" 
+  (keydown.esc)="handleCloseButtonClicked($event)"
+  (keydown.control.s)="handleSaveShortcut($event)"
+  (keydown.control.Enter)="handleSaveAndCloseShortcut()">
+  
+  <div #container id="container" [className]="isExpanded ? 'expanded d-flex flex-column' : 'd-flex flex-column'">
+    <div class="m-1 d-flex border-bottom">
+      <div class="d-flex flex-fill">
+        <h2 class="m-2 ml-3 mb-3">{{ title }}</h2>
+      </div>
+      <button id="expandButton" (click)="handleExpandButtonClicked()">
+        <i class="fa fa-expand" aria-hidden="true"></i>
+      </button>
+      <button id="closeButton" (click)="handleCloseButtonClicked(null)">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="d-flex flex-fill">
+      <ng-content></ng-content>
+    </div>
+    <div class="d-flex flex-row-reverse p-3 border-top">
+      <button type="submit" class="btn btn-primary pl-3 pr-3 pt-2 pb-2" (click)="handleSaveShortcut()">Save</button>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { ApiService } from './services/utility/api.service';
 import { AuthenticationService } from './services/security/authentication.service';
 import { NotificationService } from './services/utility/notification.service';
@@ -19,8 +20,9 @@ import { LoginGuard } from './services/security/loginGuard';
 import { ApplicationGuard } from './services/security/applicationGuard';
 import { LoginComponent } from './components/views/authentication/login/login.component';
 import { SignupComponent } from './components/views/authentication/signup/signup.component';
-import {MatButtonModule} from '@angular/material/button';
 import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
+import { EditDialogContentComponent } from './components/utility/edit-dialog-content/edit-dialog-content.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,13 +32,15 @@ import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spi
     NotificationBarComponent,
     LoginComponent,
     SignupComponent,
-    WaitSpinnerComponent
+    WaitSpinnerComponent,
+    EditDialogContentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     MatButtonModule,
+    MatDialogModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -58,6 +62,9 @@ import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spi
     ApplicationGuard,
     LoginGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EditDialogContentComponent, 
+  ],
 })
 export class AppModule { }
