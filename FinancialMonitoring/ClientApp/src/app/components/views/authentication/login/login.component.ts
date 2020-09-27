@@ -1,3 +1,4 @@
+import { MessageDialogService } from './../../../../services/utility/messageDialog.service';
 import { AuthenticationService } from './../../../../services/security/authentication.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -8,6 +9,7 @@ import { UserModel } from '../../../../models/security/user.model';
 import { ApiReply } from 'src/app/models/utility/apiReply';
 import { EditDialogContentComponent } from 'src/app/components/utility/edit-dialog-content/edit-dialog-content.component';
 import { MatDialog } from '@angular/material/dialog/';
+import { DialogResult } from 'src/app/components/utility/message-dialog/dialogResult';
 
 /**
  * Login Dialog
@@ -25,7 +27,7 @@ export class LoginComponent extends AuthenticationComponent implements OnInit
    * @param {AuthenticationService} authenticationService Injected: AuthenticationService
    * @param {Router} router Injected: Router
    */
-  constructor(authenticationService: AuthenticationService, router: Router, private dialog: MatDialog) 
+  constructor(authenticationService: AuthenticationService, router: Router, private s: MessageDialogService) 
   {
     super(authenticationService, router);
     this.form = new FormGroup({
@@ -34,10 +36,7 @@ export class LoginComponent extends AuthenticationComponent implements OnInit
     });
   }
   ngOnInit(): void {
-    this.dialog.open(EditDialogContentComponent, { 
-      panelClass: 'fullscreenDialog',
-      disableClose: true
-    });
+    this.s.execute("Test-Title", "jsdnflkjnsdfkjsdnfkjsdnfkjsdnf sdfsdguzf sdohfosdhfo saihsogdhfodhsfoi hsosih sodhfosdhfsd ioshdfiohsdfoisiodhf oisdhfoisdhfoisdh fiohs iosdhfoisdhfosidhfoshfsodf osdhfosdhf", [DialogResult.Cancel, DialogResult.No], () => {});
   }
 
   /**

@@ -1,3 +1,4 @@
+import { MessageDialogService } from './services/utility/messageDialog.service';
 import { MatButtonModule } from '@angular/material/button';
 import { ApiService } from './services/utility/api.service';
 import { AuthenticationService } from './services/security/authentication.service';
@@ -22,7 +23,8 @@ import { LoginComponent } from './components/views/authentication/login/login.co
 import { SignupComponent } from './components/views/authentication/signup/signup.component';
 import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
 import { EditDialogContentComponent } from './components/utility/edit-dialog-content/edit-dialog-content.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MessageDialogComponent } from './components/utility/message-dialog/message-dialog.component';
+import { MatDialog, MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     SignupComponent,
     WaitSpinnerComponent,
-    EditDialogContentComponent
+    EditDialogContentComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -60,11 +63,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     AuthenticationService, 
     ApiService,
     ApplicationGuard,
-    LoginGuard
+    LoginGuard,
+    MessageDialogService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    EditDialogContentComponent, 
+    MessageDialogComponent,
+    EditDialogContentComponent
   ],
 })
 export class AppModule { }

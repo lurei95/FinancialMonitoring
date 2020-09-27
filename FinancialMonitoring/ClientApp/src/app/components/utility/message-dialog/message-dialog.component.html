@@ -1,0 +1,11 @@
+<div class="container d-flex flex-column p-0">
+  <h2 mat-dialog-title>{{data.title}}</h2>
+  <mat-dialog-content class="mat-typography d-flex flex-fill">
+    <p>{{data.text}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button *ngFor="let button of buttons" class="btn btn-primary m-1" mat-dialog-close="{{button.result}}">
+      {{button.caption}}
+    </button>
+  </mat-dialog-actions>
+</div>
