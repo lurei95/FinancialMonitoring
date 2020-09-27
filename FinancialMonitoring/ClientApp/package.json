@@ -26,6 +26,8 @@
     "@angular/router": "8.2.12",
     "@datorama/akita": "^5.2.4",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.5.2",
     "core-js": "^3.6.5",

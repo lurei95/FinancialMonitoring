@@ -6,7 +6,7 @@ import { NotificationService } from './services/utility/notification.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -24,7 +24,9 @@ import { SignupComponent } from './components/views/authentication/signup/signup
 import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
 import { EditDialogContentComponent } from './components/utility/edit-dialog-content/edit-dialog-content.component';
 import { MessageDialogComponent } from './components/utility/message-dialog/message-dialog.component';
-import { MatDialog, MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { translateFactory } from './translation/translation';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,13 @@ import { MatDialog, MatDialogModule } from '@angular/material';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translateFactory,
+        deps: [HttpClient]
+      }
+    }),
     MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule,
