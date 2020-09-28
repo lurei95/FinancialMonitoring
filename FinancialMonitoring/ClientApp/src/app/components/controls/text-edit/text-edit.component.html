@@ -1,0 +1,7 @@
+<div class="input-group p-3">
+  <span [style.width]="captionWidth + 'px'" class="input-group-text bg-white" style="border: none;">
+    {{caption}}
+  </span>
+  <input [maxlength]="maxlength" autocomplete="off" type="text" 
+    [(ngModel)]="value" class="form-control"/>
+</div>

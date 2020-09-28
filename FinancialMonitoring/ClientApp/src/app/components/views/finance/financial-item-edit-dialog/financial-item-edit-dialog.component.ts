@@ -58,4 +58,9 @@ export class FinancialItemEditDialogComponent
       map(reply => reply.successful)
     );  
   }
+
+  test()
+  {
+    console.log("change");
+  }
 }

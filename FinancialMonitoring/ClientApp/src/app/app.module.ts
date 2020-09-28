@@ -29,10 +29,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { translateFactory } from './translation/translation';
 import { FinancialItemEditDialogComponent } from './components/views/finance/financial-item-edit-dialog/financial-item-edit-dialog.component';
 import { FinancialItemService } from './services/finance/financialItem.service';
+import { TextEditComponent } from './components/controls/text-edit/text-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TextEditComponent,
     FinancialItemEditDialogComponent,
     NavMenuComponent,
     HomeComponent,
@@ -42,7 +44,8 @@ import { FinancialItemService } from './services/finance/financialItem.service';
     WaitSpinnerComponent,
     EditDialogContentComponent,
     MessageDialogComponent,
-    FinancialItemEditDialogComponent
+    FinancialItemEditDialogComponent,
+    TextEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

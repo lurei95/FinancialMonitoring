@@ -1,9 +1,6 @@
 <app-edit-dialog-content (close)="close()" (save)="save()" (saveAndClose)="saveAndClose()">
   <form class="d-flex flex-column flex-fill">
-    <div class="input-group p-3">
-      <span class="input-group-text bg-white" style="border: none; width: 75px;">Title</span>
-      <input autocomplete="off" type="text" class="form-control"/>
-    </div>
+    <app-text-edit [(value)]="_entity.title" (valueChange)="test()" [maxLength]="30" [captionWidth]="75" [caption]="'Titel'"></app-text-edit>
     <div class="d-flex flex-column fullscreen-row">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
