@@ -1,3 +1,4 @@
+import { LocalizationService } from './../../../services/utility/localization.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogInformation } from './dialogInformation';
@@ -31,7 +32,8 @@ export class MessageDialogComponent
    * @param {MatDialogRef<MessageDialogComponent>} self Injected: reference to the own dialog
    */
   constructor(@Inject(MAT_DIALOG_DATA) data: DialogInformation, 
-    private self: MatDialogRef<MessageDialogComponent>) 
+    localizationService: LocalizationService,
+    self: MatDialogRef<MessageDialogComponent>) 
   { 
     this._data = data; 
     self.disableClose = true;
@@ -39,7 +41,7 @@ export class MessageDialogComponent
     {
       let info = new ButtonInformation();
       info.result = item;
-      info.caption = item
+      info.caption = info.caption = localizationService.execute(item);
       this._buttons.push(info);
     });
   }
