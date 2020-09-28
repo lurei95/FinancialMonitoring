@@ -31,4 +31,3 @@ export class FinancialCategoryService extends ModelServiceBase<FinancialCategory
   constructor(apiService: ApiService, authenticationService: AuthenticationService) 
   { super(apiService, authenticationService) }
 }
-}
