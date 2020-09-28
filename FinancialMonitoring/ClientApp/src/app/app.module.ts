@@ -24,12 +24,13 @@ import { SignupComponent } from './components/views/authentication/signup/signup
 import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
 import { EditDialogContentComponent } from './components/utility/edit-dialog-content/edit-dialog-content.component';
 import { MessageDialogComponent } from './components/utility/message-dialog/message-dialog.component';
-import { MatDialog, MatDialogModule } from '@angular/material';
+import { MatDialog, MatDialogModule, MatSelectModule } from '@angular/material';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { translateFactory } from './translation/translation';
 import { FinancialItemEditDialogComponent } from './components/views/finance/financial-item-edit-dialog/financial-item-edit-dialog.component';
 import { FinancialItemService } from './services/finance/financialItem.service';
 import { TextEditComponent } from './components/controls/text-edit/text-edit.component';
+import { ComboEditComponent } from './components/controls/combo-edit/combo-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TextEditComponent } from './components/controls/text-edit/text-edit.com
     EditDialogContentComponent,
     MessageDialogComponent,
     FinancialItemEditDialogComponent,
-    TextEditComponent
+    TextEditComponent,
+    ComboEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,6 +60,7 @@ import { TextEditComponent } from './components/controls/text-edit/text-edit.com
         deps: [HttpClient]
       }
     }),
+    MatSelectModule,
     MatButtonModule,
     MatDialogModule,
     ReactiveFormsModule,
