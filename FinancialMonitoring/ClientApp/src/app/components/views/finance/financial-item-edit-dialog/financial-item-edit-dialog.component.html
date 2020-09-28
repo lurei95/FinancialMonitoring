@@ -1,0 +1,19 @@
+<app-edit-dialog-content (close)="close()" (save)="save()" (saveAndClose)="saveAndClose()">
+  <form class="d-flex flex-column flex-fill">
+    <div class="input-group p-3">
+      <span class="input-group-text bg-white" style="border: none; width: 75px;">Title</span>
+      <input autocomplete="off" type="text" class="form-control"/>
+    </div>
+    <div class="d-flex flex-column fullscreen-row">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-dark text-white" style="width: 100px;">Value</span>
+        </div>
+        <input autocomplete="off" type="text" class="form-control"/>
+      </div>
+    </div>
+    <div class="d-flex flex-column fullscreen-row">
+
+    </div>
+  </form>
+</app-edit-dialog-content>

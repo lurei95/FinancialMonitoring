@@ -10,6 +10,7 @@ import { ApiReply } from 'src/app/models/utility/apiReply';
 import { EditDialogContentComponent } from 'src/app/components/utility/edit-dialog-content/edit-dialog-content.component';
 import { MatDialog } from '@angular/material/dialog/';
 import { DialogResult } from 'src/app/components/utility/message-dialog/dialogResult';
+import { FinancialItemEditDialogComponent } from '../../finance/financial-item-edit-dialog/financial-item-edit-dialog.component';
 
 /**
  * Login Dialog
@@ -27,7 +28,7 @@ export class LoginComponent extends AuthenticationComponent implements OnInit
    * @param {AuthenticationService} authenticationService Injected: AuthenticationService
    * @param {Router} router Injected: Router
    */
-  constructor(authenticationService: AuthenticationService, router: Router, private s: MessageDialogService) 
+  constructor(authenticationService: AuthenticationService, router: Router, private s: MatDialog) 
   {
     super(authenticationService, router);
     this.form = new FormGroup({
@@ -36,7 +37,11 @@ export class LoginComponent extends AuthenticationComponent implements OnInit
     });
   }
   ngOnInit(): void {
-    this.s.execute("Test-Title", "jsdnflkjnsdfkjsdnfkjsdnfkjsdnf sdfsdguzf sdohfosdhfo saihsogdhfodhsfoi hsosih sodhfosdhfsd ioshdfiohsdfoisiodhf oisdhfoisdhfoisdh fiohs iosdhfoisdhfosidhfoshfsodf osdhfosdhf", [DialogResult.Cancel, DialogResult.No], () => {});
+
+    this.s.open(FinancialItemEditDialogComponent, {
+      panelClass: 'fullscreenDialog',
+      disableClose: true
+    });
   }
 
   /**

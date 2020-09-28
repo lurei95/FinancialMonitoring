@@ -24,13 +24,16 @@ import { SignupComponent } from './components/views/authentication/signup/signup
 import { WaitSpinnerComponent } from './components/utility/wait-spinner/wait-spinner.component';
 import { EditDialogContentComponent } from './components/utility/edit-dialog-content/edit-dialog-content.component';
 import { MessageDialogComponent } from './components/utility/message-dialog/message-dialog.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialog, MatDialogModule } from '@angular/material';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { translateFactory } from './translation/translation';
+import { FinancialItemEditDialogComponent } from './components/views/finance/financial-item-edit-dialog/financial-item-edit-dialog.component';
+import { FinancialItemService } from './services/finance/financialItem.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FinancialItemEditDialogComponent,
     NavMenuComponent,
     HomeComponent,
     NotificationBarComponent,
@@ -38,7 +41,8 @@ import { translateFactory } from './translation/translation';
     SignupComponent,
     WaitSpinnerComponent,
     EditDialogContentComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    FinancialItemEditDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -67,8 +71,10 @@ import { translateFactory } from './translation/translation';
     NotificationService, 
     NotificationQuery,
     NotificationStore, 
-    UserQuery, 
-    UserStore, 
+    UserQuery,
+    MatDialog,
+    UserStore,
+    FinancialItemService,
     AuthenticationService, 
     ApiService,
     ApplicationGuard,
@@ -78,7 +84,7 @@ import { translateFactory } from './translation/translation';
   bootstrap: [AppComponent],
   entryComponents: [
     MessageDialogComponent,
-    EditDialogContentComponent
+    FinancialItemEditDialogComponent
   ],
 })
 export class AppModule { }

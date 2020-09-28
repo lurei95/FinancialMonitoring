@@ -15,12 +15,16 @@ export abstract class ModelServiceBase<TModel>
    */
   protected abstract get path(): string;
 
+  /**
+   * @returns {(new () => TModel)} The type of the model
+   */
   protected abstract get type(): (new () => TModel);
 
   /**
    * Constructor
    * 
    * @param {ApiService} apiService Injected: The service for making api calls
+   * @param {AuthenticationService} authenticationService Injected AuthenticationService
    */
   constructor(protected apiService: ApiService, protected authenticationService: AuthenticationService) 
   { }
