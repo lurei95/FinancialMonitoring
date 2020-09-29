@@ -32,6 +32,11 @@ import { FinancialItemService } from './services/finance/financialItem.service';
 import { TextEditComponent } from './components/controls/text-edit/text-edit.component';
 import { ComboEditComponent } from './components/controls/combo-edit/combo-edit.component';
 import { DateEditComponent } from './components/controls/date-edit/date-edit.component';
+import { NgxMaskModule } from 'ngx-mask';
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeDe);
 
 @NgModule({
   declarations: [
@@ -62,6 +67,7 @@ import { DateEditComponent } from './components/controls/date-edit/date-edit.com
         deps: [HttpClient]
       }
     }),
+    NgxMaskModule.forRoot(),
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,

@@ -1,3 +1,5 @@
+import { LocalizationService } from 'src/app/services/utility/localization.service';
+import { MaskKind } from './mask-kind';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 /**
@@ -10,6 +12,31 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TextEditComponent
 {
+  private get mask(): string 
+  {
+    switch (this._maskKind)
+    {
+      case MaskKind.Currency:
+      case MaskKind.DecimalNumber:
+        return '0*.00';
+      case MaskKind.Number:
+        return '*';
+      default:
+        return null;
+    }
+  } 
+
+  private get suffix():string 
+  { 
+    switch (this._maskKind)
+    {
+      case MaskKind.Currency:
+        return this.localizationService.currncySymbol;
+      default:
+        return null;
+    }
+  }
+
   /**
    * The caption of the edit
    */
@@ -23,7 +50,20 @@ export class TextEditComponent
   /**
    * The max length of the input text
    */
-  @Input() maxLength: number;
+  @Input() maxLength: number = 20;
+
+  private _maskKind: MaskKind = MaskKind.None;
+  /**
+   * The mask of the edit
+   */
+  get maskKind(): MaskKind { return this._maskKind; }
+  /**
+   * The mask of the edit
+   */
+  @Input() set maskKind(value: MaskKind) 
+  { 
+    this._maskKind = value; 
+  };
 
   private _value: string;
   /**
@@ -46,4 +86,12 @@ export class TextEditComponent
    * The text change event
    */
   @Output() valueChange: EventEmitter<string> = new EventEmitter();
+
+  /**
+   * Constructors
+   * 
+   * @param {LocalizationService} localizationService Injected: LocalizationService) 
+   */
+  constructor(private localizationService: LocalizationService)
+  { }
 }

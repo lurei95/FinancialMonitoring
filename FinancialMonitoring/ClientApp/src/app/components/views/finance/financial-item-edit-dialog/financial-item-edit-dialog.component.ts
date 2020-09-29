@@ -1,3 +1,4 @@
+import { MaskKind } from './../../../controls/text-edit/mask-kind';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NotificationService } from './../../../../services/utility/notification.service';
@@ -17,6 +18,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class FinancialItemEditDialogComponent
 {
   private _entity: FinancialItemModel;
+
+  private maskKind = MaskKind.Currency
 
   /**
    * Constructor
