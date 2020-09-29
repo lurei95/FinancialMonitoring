@@ -46,7 +46,7 @@ export class FinancialItemModel
    */
   set value(value: number) { this._value = value; }
 
-  private _dueDate: Date;
+  private _dueDate: Date = new Date(Date.now());
   /**
    * @returns {Date} Date when the item was due
    */
@@ -56,7 +56,7 @@ export class FinancialItemModel
    */
   set dueDate(value: Date){ this._dueDate = value; }
 
-  private _userId;
+  private _userId: string;
   /**
    * @returns {string} The id of the user
    */

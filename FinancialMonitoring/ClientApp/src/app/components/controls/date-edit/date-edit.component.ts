@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/**
+ * Component for a date edit
+ */
 @Component({
   selector: 'app-date-edit',
   templateUrl: './date-edit.component.html',
@@ -21,7 +24,7 @@ export class DateEditComponent
    */
   @Input() captionWidth: number;
 
-  private _selectedDate: Date;
+  private _selectedDate: Date = new Date(Date.now());
   /**
    * @param {Date} value The currently selected Date
    */
@@ -66,8 +69,7 @@ export class DateEditComponent
   /**
    * @param {string} value The start view of the date picker
    */
-  @Input() 
-  set startView(value: string) { this._startView = value; }
+  @Input() set startView(value: string) { this._startView = value; }
   /**
    * @returns {string} The start view of the date picker
    */

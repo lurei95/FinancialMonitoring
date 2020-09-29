@@ -11,6 +11,7 @@ import { EditDialogContentComponent } from 'src/app/components/utility/edit-dial
 import { MatDialog } from '@angular/material/dialog/';
 import { DialogResult } from 'src/app/components/utility/message-dialog/dialogResult';
 import { FinancialItemEditDialogComponent } from '../../finance/financial-item-edit-dialog/financial-item-edit-dialog.component';
+import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
 
 /**
  * Login Dialog
@@ -40,6 +41,7 @@ export class LoginComponent extends AuthenticationComponent implements OnInit
 
     this.s.open(FinancialItemEditDialogComponent, {
       panelClass: 'fullscreenDialog',
+      data: new FinancialItemModel(),
       disableClose: true
     });
   }

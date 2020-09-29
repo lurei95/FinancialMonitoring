@@ -2,9 +2,9 @@ import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NotificationService } from './../../../../services/utility/notification.service';
 import { FinancialItemService } from './../../../../services/finance/financialItem.service';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 /**
  * Dialog for editing or creating a @see FinancialItemModel
@@ -16,19 +16,21 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class FinancialItemEditDialogComponent
 {
-  private _entity: FinancialItemModel = new FinancialItemModel();
+  private _entity: FinancialItemModel;
 
   /**
    * Constructor
    * 
+   * @param {FinancialItemModel} data: Injected: Model passed as dialog parameter
    * @param {FinancialItemService} service Injected: FiancialItemService
    * @param {NotificationService} notificationService Injected: NotificationService
    * @param {MatDialogRef<FinancialItemEditDialogComponent>} self Injected: dialog
    */
-  constructor(private service: FinancialItemService, 
+  constructor(@Inject(MAT_DIALOG_DATA) data: FinancialItemModel,
+    private service: FinancialItemService, 
     private notificationService: NotificationService,
     private self: MatDialogRef<FinancialItemEditDialogComponent>) 
-  { }
+  { this._entity = data; }
 
   private saveAndClose()
   {
@@ -59,8 +61,5 @@ export class FinancialItemEditDialogComponent
     );  
   }
 
-  test()
-  {
-    console.log("change");
-  }
+  private handleDateChanged(date: Date) { this._entity.dueDate = date; }
 }
