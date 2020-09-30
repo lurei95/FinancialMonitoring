@@ -36,7 +36,7 @@ export class FinancialItemModel
    */
   set title(value: string) { this._title = value; }
 
-  private _value: number;
+  private _value: number = 0.00;
   /**
    * @returns {number} The value of the item
    */

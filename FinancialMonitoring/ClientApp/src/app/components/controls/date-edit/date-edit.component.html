@@ -2,18 +2,22 @@
   <span [style.width]="captionWidth + 'px'" class="input-group-text bg-white" style="border: none;">
     {{caption}}
   </span>
-  <input id="dateInput" class="form-control"
+  <input id="dateInput" class="form-control input-with-suffix"
     [min]="minDate" [max]="maxDate"
     [value]="selectedDate"
     [matDatepicker]="picker" 
     (dateInput)="handleDateChange($event.target.value)" 
     (dateChange)="handleDateChange($event.target.value)"
-    [disabled]="!isEnabled">
-  <mat-datepicker-toggle id="toggle" 
-    matSuffix [for]="picker">
-  </mat-datepicker-toggle>
-  <mat-datepicker [startView]="startView" 
-    id="datePicker"
-    [startAt]="startDate" #picker>
-  </mat-datepicker>
+    disabled>
+    <div class="suffix m-0 p-0">
+      <div class="suffix-inner">
+        <mat-datepicker-toggle id="toggle" 
+          matSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker [startView]="startView" 
+          id="datePicker" disabled="false"
+          [startAt]="startDate" #picker>
+        </mat-datepicker>
+      </div>
+    </div>
 </div>

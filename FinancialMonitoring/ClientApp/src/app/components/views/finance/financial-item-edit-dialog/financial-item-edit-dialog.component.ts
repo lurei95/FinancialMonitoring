@@ -21,6 +21,15 @@ export class FinancialItemEditDialogComponent
 
   private maskKind = MaskKind.Currency
 
+  private get value():string { return this._entity.value.toString(); }
+
+  private set value(value: string)
+  {
+    let number: number = Number(value);
+    if (number)
+      this._entity.value = number;
+  }
+
   /**
    * Constructor
    * 
