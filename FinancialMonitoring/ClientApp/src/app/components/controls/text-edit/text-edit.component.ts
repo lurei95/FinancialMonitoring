@@ -1,6 +1,7 @@
 import { LocalizationService } from 'src/app/services/utility/localization.service';
 import { MaskKind } from './mask-kind';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EditBase } from '../edit-base';
 
 /**
  * A simple text edit
@@ -10,7 +11,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './text-edit.component.html',
   styleUrls: ['./text-edit.component.css']
 })
-export class TextEditComponent
+export class TextEditComponent extends EditBase
 {
   private get mask(): string 
   {
@@ -37,20 +38,15 @@ export class TextEditComponent
     }
   }
 
-  /**
-   * The caption of the edit
-   */
-  @Input() caption: string;
-
-  /**
-   * The width of the caption area
-   */
-  @Input() captionWidth: number;
-
+  private _maxLength: number = 20;
   /**
    * The max length of the input text
    */
-  @Input() maxLength: number = 20;
+  @Input() set maxLength(value: number) { this._maxLength = value; }
+  /**
+   * The max length of the input text
+   */
+  get maxLength(): number { return this._maxLength; }
 
   private _maskKind: MaskKind = MaskKind.None;
   /**
@@ -60,10 +56,7 @@ export class TextEditComponent
   /**
    * The mask of the edit
    */
-  @Input() set maskKind(value: MaskKind) 
-  { 
-    this._maskKind = value; 
-  };
+  @Input() set maskKind(value: MaskKind) { this._maskKind = value; };
 
   private _value: string;
   /**
@@ -93,5 +86,5 @@ export class TextEditComponent
    * @param {LocalizationService} localizationService Injected: LocalizationService) 
    */
   constructor(private localizationService: LocalizationService)
-  { }
+  { super(); }
 }

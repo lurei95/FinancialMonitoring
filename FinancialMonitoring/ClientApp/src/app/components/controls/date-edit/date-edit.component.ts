@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { EditBase } from '../edit-base';
 
 /**
  * Component for a date edit
@@ -8,21 +9,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './date-edit.component.html',
   styleUrls: ['./date-edit.component.css']
 })
-export class DateEditComponent
+export class DateEditComponent extends EditBase
 {
   private static minDate: Date = new Date(-8640000000000000);
 
   private static maxDate: Date = new Date(8640000000000000);
-
-  /**
-   * The caption of the edit
-   */
-  @Input() caption: string;
-
-  /**
-   * The width of the caption area
-   */
-  @Input() captionWidth: number;
 
   private _selectedDate: Date = new Date(Date.now());
   /**

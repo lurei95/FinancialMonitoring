@@ -3,7 +3,8 @@
     {{caption}}
   </span>
   <input [maxlength]="maxlength" autocomplete="off" type="text" [mask]="mask"
-    [(ngModel)]="value" [className]="suffix != null? 'form-control input-with-suffix' : 'form-control'"/>
+    [(ngModel)]="value" [disabled]="!isEnabled"
+    [className]="suffix != null? 'form-control input-with-suffix' : 'form-control'"/>
   <div class="suffix m-0 p-0" *ngIf="suffix != null">
     <div class="suffix-inner">
       {{suffix}}

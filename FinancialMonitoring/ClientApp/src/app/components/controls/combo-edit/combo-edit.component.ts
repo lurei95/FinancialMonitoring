@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LocalizationService } from 'src/app/services/utility/localization.service';
+import { EditBase } from '../edit-base';
 
 /**
  * Component for combo edit
@@ -9,19 +10,9 @@ import { LocalizationService } from 'src/app/services/utility/localization.servi
   templateUrl: './combo-edit.component.html',
   styleUrls: ['./combo-edit.component.css']
 })
-export class ComboEditComponent
+export class ComboEditComponent extends EditBase
 {
-  /**
-   * The caption of the edit
-   */
-  @Input() caption: string;
-
-  /**
-   * The width of the caption area
-   */
-  @Input() captionWidth: number;
-
-  private _options: {editValue: string, displayValue: string}[] = [{editValue: "test", displayValue: "test"}];
+  private _options: {editValue: string, displayValue: string}[] = [];
   /**
    * @returns {{editValue: string, displayValue: string}[]} The selectable options of the ComboBox
    */
@@ -40,7 +31,7 @@ export class ComboEditComponent
     });
   }
 
-  private _selectedValue: string = "test";
+  private _selectedValue: string;
   /**
    * @returns {string} The selected value
    */
@@ -67,5 +58,6 @@ export class ComboEditComponent
    * 
    * @param {LocalizationService} localizationService Injected: service for providing localized strings
    */
-  constructor(private localizationService: LocalizationService) { }
+  constructor(private localizationService: LocalizationService) 
+  { super() }
 }

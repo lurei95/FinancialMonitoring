@@ -2,7 +2,7 @@
   <span [style.width]="captionWidth + 'px'" class="input-group-text bg-white" style="border: none;">
     {{caption}}
   </span>
-  <mat-select class="w-100" [(value)]="selectedValue" class="form-control">
+  <mat-select class="w-100" [(value)]="selectedValue" class="form-control" [disabled]="!isEnabled">
     <mat-option *ngFor="let option of options;" 
       [value]="option.editValue">
       {{option.displayValue}}

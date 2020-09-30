@@ -7,7 +7,8 @@
     [value]="selectedDate"
     [matDatepicker]="picker" 
     (dateInput)="handleDateChange($event.target.value)" 
-    (dateChange)="handleDateChange($event.target.value)">
+    (dateChange)="handleDateChange($event.target.value)"
+    [disabled]="!isEnabled">
   <mat-datepicker-toggle id="toggle" 
     matSuffix [for]="picker">
   </mat-datepicker-toggle>
