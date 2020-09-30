@@ -28,7 +28,7 @@ export class EditDialogContentComponent
   /**
    * The title of the dialog
    */
-  @Input() public title: string = "This is a test title";
+  @Input() public title: string = "";
 
   private _isExpanded: boolean;
   /**

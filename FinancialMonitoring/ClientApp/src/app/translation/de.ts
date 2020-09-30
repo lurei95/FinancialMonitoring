@@ -5,4 +5,11 @@ export const de =
   "Yes" : "Ja",
   "No" : "Nein",
   "Cancel" : "Abbrechen",
+
+  //FinancialItem
+  "FinancialItem": {
+    "Title": "Titel",
+    "Due": "Fällig",
+    "Value": "Wert"
+  },
 }
