@@ -31,10 +31,12 @@ import { FinancialItemEditDialogComponent } from './components/views/finance/fin
 import { FinancialItemService } from './services/finance/financialItem.service';
 import { TextEditComponent } from './components/controls/text-edit/text-edit.component';
 import { ComboEditComponent } from './components/controls/combo-edit/combo-edit.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DateEditComponent } from './components/controls/date-edit/date-edit.component';
 import { NgxMaskModule } from 'ngx-mask';
 import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
+import { CheckEditComponent } from './components/controls/check-edit/check-edit.component';
 
 registerLocaleData(localeDe);
 
@@ -54,7 +56,8 @@ registerLocaleData(localeDe);
     FinancialItemEditDialogComponent,
     TextEditComponent,
     ComboEditComponent,
-    DateEditComponent
+    DateEditComponent,
+    CheckEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -73,6 +76,7 @@ registerLocaleData(localeDe);
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([

@@ -21,12 +21,12 @@
   height: 100%;
 }
 
-/deep/ .mat-icon-button {
+:host >>> .mat-icon-button {
   height: 24px !important;
   width: 24px !important;
 }
 
-/deep/ svg {
+:host >>> svg {
   height: 30px !important;
   width: 30px !important;
   padding-bottom: 5px;
