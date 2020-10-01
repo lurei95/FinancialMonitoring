@@ -6,10 +6,16 @@ export const en =
   "No" : "No",
   "Cancel" : "Cancel",
 
-    //FinancialItem
+  //FinancialItem
   "FinancialItem": {
     "Title": "Title",
     "Due": "Due",
-    "Value": "Value"
+    "Value": "Value",
+    "OccurenceKind": "Repeat"
   },
+
+  //OccurenceKind
+  "OneTime": "One time",
+  "Monthly": "Monthly",
+  "Yearly": "Yearly",
 }

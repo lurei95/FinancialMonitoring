@@ -57,7 +57,7 @@ export class FinancialItemModel
    */
   set dueDate(value: Date){ this._dueDate = value; }
 
-  private _occurenceKind: OccurenceKind;
+  private _occurenceKind: OccurenceKind = OccurenceKind.OneTime;
   /**
    * @returns {OccurenceKind} The occurence kind of the item
    */

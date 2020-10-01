@@ -2,17 +2,22 @@
   (saveAndClose)="saveAndClose()" [title]="_entity.title">
   <form class="d-flex flex-column flex-fill">
     <app-text-edit [(value)]="_entity.title"  [maxLength]="30" 
-      [captionWidth]="75" [caption]="('FinancialItem.Title' | translate)">
+      [captionWidth]="125" [caption]="('FinancialItem.Title' | translate)">
     </app-text-edit>
     <div class="d-flex flex-column fullscreen-row">
       <div class="d-flex flex-column f-col-50">
-        <app-text-edit [captionWidth]="75" [maskKind]="maskKind" 
+        <app-text-edit [captionWidth]="125" [maskKind]="maskKind" 
           [caption]="('FinancialItem.Value' | translate)" [(value)]="value">
         </app-text-edit>
-        <app-check-edit [caption]="'test'"></app-check-edit>
+        <app-combo-edit [captionWidth]="125" 
+          [caption]="('FinancialItem.OccurenceKind' | translate)"
+          [enumType]="occurenceKindType"
+          (selectedValueChanged)="onOccurenceKindChanged($event)"
+          [selectedValue]="_entity.occurenceKind">
+        </app-combo-edit>
       </div>
       <div class="d-flex flex-column f-col-50">
-        <app-date-edit [captionWidth]="75" [caption]="('FinancialItem.Due' | translate)" 
+        <app-date-edit [captionWidth]="125" [caption]="('FinancialItem.Due' | translate)" 
           (dateChanged)="handleDateChanged($event)"
           [selectedDate] ="_entity.dueDate">
         </app-date-edit>

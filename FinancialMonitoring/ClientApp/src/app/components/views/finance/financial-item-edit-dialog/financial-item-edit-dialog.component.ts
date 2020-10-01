@@ -1,3 +1,4 @@
+import { OccurenceKind } from './../../../../models/finance/occurenceKind';
 import { MaskKind } from './../../../controls/text-edit/mask-kind';
 import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -29,6 +30,8 @@ export class FinancialItemEditDialogComponent
     if (number)
       this._entity.value = number;
   }
+
+  private occurenceKindType = OccurenceKind
 
   /**
    * Constructor
@@ -72,6 +75,9 @@ export class FinancialItemEditDialogComponent
       map(reply => reply.successful)
     );  
   }
+
+  private onOccurenceKindChanged(occurenceKind: OccurenceKind) 
+  { this._entity.occurenceKind = occurenceKind; }
 
   private handleDateChanged(date: Date) { this._entity.dueDate = date; }
 }
