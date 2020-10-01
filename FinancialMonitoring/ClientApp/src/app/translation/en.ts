@@ -1,10 +1,14 @@
 export const en = 
 {
+  //General
+  "Title": "Title",
+  "Properties": "Properties",
+
   //Dialog options
-  "Delete" : "Delete",
-  "Yes" : "Yes",
-  "No" : "No",
-  "Cancel" : "Cancel",
+  "Delete": "Delete",
+  "Yes": "Yes",
+  "No": "No",
+  "Cancel": "Cancel",
 
   //FinancialItem
   "FinancialItem": {

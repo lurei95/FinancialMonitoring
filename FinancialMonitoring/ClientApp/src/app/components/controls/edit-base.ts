@@ -15,7 +15,7 @@ export abstract class EditBase
    */
   @Input() set validator(value: (value: any) => string) { this._validator = value; }
 
-  private _error: string = "test";
+  private _error: string;
   /**
    * @returns {string} The error of the edit
    */
