@@ -40,6 +40,12 @@ namespace FinancialMonitoring.Entities.Finance
     [JsonProperty("_dueDate")]
     public DateTime DueDate { get; set; }
 
+    /// <summary>
+    /// The occurence kind of the item
+    /// </summary>
+    [JsonProperty("_occurenceKind")]
+    public OccurenceKind OccurenceKind { get; set; }
+
     ///<inheritdoc/>
     public object Id => FinancialItemId;
 

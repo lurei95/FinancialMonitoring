@@ -1,3 +1,4 @@
+import { OccurenceKind } from './occurenceKind';
 import { FinancialCategoryModel } from "./financialCatgegory.model";
 import { AttachmentItemModel } from "./attachmentItem.model";
 
@@ -55,6 +56,16 @@ export class FinancialItemModel
    * @param {Date} value Date when the item was due
    */
   set dueDate(value: Date){ this._dueDate = value; }
+
+  private _occurenceKind: OccurenceKind;
+  /**
+   * @returns {OccurenceKind} The occurence kind of the item
+   */
+  get occurenceKind(): OccurenceKind { return this._occurenceKind; }
+  /**
+   * @param {OccurenceKind} value The occurence kind of the item
+   */
+  set occurenceKind(value: OccurenceKind) { this._occurenceKind = value; }
 
   private _userId: string;
   /**
