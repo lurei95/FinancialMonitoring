@@ -1,10 +1,3 @@
-.input-with-suffix {
-  border-top: 1px solid #ced4da;
-  border-bottom: 1px solid #ced4da;
-  border-left: 1px solid #ced4da;
-  border-right: none;
-}
-
 .suffix {
   border-top: 1px solid #ced4da;
   border-bottom: 1px solid #ced4da;
@@ -17,6 +10,5 @@
 
 .suffix-inner {
   border-left: 1px solid #ced4da;
-  margin: 0.175rem;
-  padding: 0.2rem 0.5rem;
+  padding: 0rem 0.5rem;
 }

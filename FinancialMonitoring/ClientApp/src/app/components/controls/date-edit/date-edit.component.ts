@@ -7,7 +7,7 @@ import { EditBase } from '../edit-base';
 @Component({
   selector: 'app-date-edit',
   templateUrl: './date-edit.component.html',
-  styleUrls: ['./date-edit.component.css']
+  styleUrls: ['./date-edit.component.css', '../edits.css']
 })
 export class DateEditComponent extends EditBase
 {
@@ -76,8 +76,14 @@ export class DateEditComponent extends EditBase
     let date = Date.parse(dateText);
     if(!isNaN(date))
     {
-      this.selectedDate = new Date(dateText);
-      this.dateChanged.emit(this.selectedDate); 
+      let date: Date = new Date(dateText);
+      if (this.selectedDate != date)
+      {
+        if (this.validator)
+          this.error = this.validator(date);
+        this.selectedDate = date;
+        this.dateChanged.emit(this.selectedDate); 
+      }
     }
   }
 }

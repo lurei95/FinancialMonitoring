@@ -4,7 +4,7 @@ import { EditBase } from '../edit-base';
 @Component({
   selector: 'app-check-edit',
   templateUrl: './check-edit.component.html',
-  styleUrls: ['./check-edit.component.css']
+  styleUrls: ['./check-edit.component.css', '../edits.css']
 })
 export class CheckEditComponent extends EditBase
 {
@@ -20,6 +20,8 @@ export class CheckEditComponent extends EditBase
   { 
     if (this._checked != value)
     {
+      if (this.validator)
+        this.error = this.validator(value);
       this._checked = value;
       this.checkedChange.emit(value);
     }

@@ -9,7 +9,7 @@ import { EditBase } from '../edit-base';
 @Component({
   selector: 'app-text-edit',
   templateUrl: './text-edit.component.html',
-  styleUrls: ['./text-edit.component.css']
+  styleUrls: ['./text-edit.component.css', '../edits.css']
 })
 export class TextEditComponent extends EditBase
 {
@@ -71,6 +71,8 @@ export class TextEditComponent extends EditBase
     if (this._value != value)
     {
       this._value = value;
+      if (this.validator)
+        this.error = this.validator(value);
       this.valueChange.emit(value);
     }
   }

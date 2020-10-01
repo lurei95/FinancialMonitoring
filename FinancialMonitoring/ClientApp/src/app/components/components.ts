@@ -2,6 +2,7 @@ import { AppComponent } from "../app.component";
 import { CheckEditComponent } from "./controls/check-edit/check-edit.component";
 import { ComboEditComponent } from "./controls/combo-edit/combo-edit.component";
 import { DateEditComponent } from "./controls/date-edit/date-edit.component";
+import { ErrorNotificationComponent } from "./controls/error-notification/error-notification.component";
 import { TextEditComponent } from "./controls/text-edit/text-edit.component";
 import { NavMenuComponent } from "./nav-menu/nav-menu.component";
 import { EditDialogContentComponent } from "./utility/edit-dialog-content/edit-dialog-content.component";
@@ -32,7 +33,8 @@ export const components = [
   TextEditComponent,
   ComboEditComponent,
   DateEditComponent,
-  CheckEditComponent
+  CheckEditComponent,
+  ErrorNotificationComponent
 ]
 
 /**

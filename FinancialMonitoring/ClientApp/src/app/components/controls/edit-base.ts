@@ -5,6 +5,26 @@ import { Input } from "@angular/core";
  */
 export abstract class EditBase
 {
+  private _validator: (value: any) => string;
+  /**
+   * @returns {(value: any) => string} Validator for validating the value
+   */
+  get validator(): (value: any) => string { return this._validator; }
+  /**
+   * @param {(value: any) => string} value Validator for validating the value
+   */
+  @Input() set validator(value: (value: any) => string) { this._validator = value; }
+
+  private _error: string = "test";
+  /**
+   * @returns {string} The error of the edit
+   */
+  get error(): string { return this._error; }
+  /**
+   * @param {string} value The error of the edit
+   */
+  set error(value: string) { this._error = value; }
+
   private _caption: string;
   /**
    * @returns {string} The caption of the edit

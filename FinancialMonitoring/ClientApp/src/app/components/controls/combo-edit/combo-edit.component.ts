@@ -8,7 +8,7 @@ import { EditBase } from '../edit-base';
 @Component({
   selector: 'app-combo-edit',
   templateUrl: './combo-edit.component.html',
-  styleUrls: ['./combo-edit.component.css']
+  styleUrls: ['./combo-edit.component.css', '../edits.css']
 })
 export class ComboEditComponent extends EditBase
 {
@@ -43,6 +43,8 @@ export class ComboEditComponent extends EditBase
   { 
     if (this._selectedValue != value)
     {
+      if (this.validator)
+        this.error = this.validator(value);
       this._selectedValue = value;
       this.selectedValueChanged.emit(value);
     }
