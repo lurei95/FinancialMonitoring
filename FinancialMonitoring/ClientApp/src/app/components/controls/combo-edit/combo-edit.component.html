@@ -3,7 +3,7 @@
     {{caption}}
   </span>
   <app-error-notification [error]="error"></app-error-notification>
-  <mat-select [(value)]="selectedValue" [disabled]="!isEnabled"
+  <mat-select [(value)]="selectedValue" [disabled]="!isEnabled" [placeholder]="error"
     [ngClass]="{'form-control': true, 'error': this.error}">
     <mat-option *ngFor="let option of options;" 
       [value]="option.editValue">

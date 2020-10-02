@@ -1,3 +1,4 @@
+import { RequiredValidator } from './validation/required-validator.service';
 import { FinancialItemService } from "./finance/financialItem.service";
 import { ApplicationGuard } from "./security/applicationGuard";
 import { AuthenticationService } from "./security/authentication.service";
@@ -16,5 +17,6 @@ export const services = [
   ApiService,
   ApplicationGuard,
   LoginGuard,
-  MessageDialogService
+  MessageDialogService,
+  RequiredValidator
 ]

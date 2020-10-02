@@ -2,14 +2,13 @@
   (saveAndClose)="saveAndClose()" [title]="_entity.title">
   <form class="d-flex flex-column flex-fill ml-2">
     <h2 class="ml-3 mb-2 mt-3">{{'Title' | translate}}</h2>
-    <app-text-edit [(value)]="_entity.title"  [maxLength]="30" 
-      [validator]="titleValidator"
+    <app-text-edit [(value)]="_entity.title" [maxLength]="30" [validator]="titleValidator"
       [captionWidth]="100" [caption]="('FinancialItem.Title' | translate)">
     </app-text-edit>
     <h2 class="ml-3 mb-2 mt-3">{{'Properties' | translate}}</h2>
     <div class="d-flex flex-column fullscreen-row">
       <div class="d-flex flex-column f-col-50">
-        <app-text-edit [captionWidth]="100" [maskKind]="maskKind" 
+        <app-text-edit [captionWidth]="100" [maskKind]="maskKind" [validator]="valueValidator"
           [caption]="('FinancialItem.Value' | translate)" [(value)]="value">
         </app-text-edit>
         <app-date-edit [captionWidth]="100" [caption]="('FinancialItem.Due' | translate)" 
