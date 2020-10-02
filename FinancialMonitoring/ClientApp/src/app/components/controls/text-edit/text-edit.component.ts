@@ -1,6 +1,6 @@
 import { LocalizationService } from 'src/app/services/utility/localization.service';
 import { MaskKind } from './mask-kind';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { EditBase } from '../edit-base';
 
 /**
@@ -11,7 +11,7 @@ import { EditBase } from '../edit-base';
   templateUrl: './text-edit.component.html',
   styleUrls: ['./text-edit.component.css', '../edits.css']
 })
-export class TextEditComponent extends EditBase
+export class TextEditComponent extends EditBase implements OnChanges
 {
   private get mask(): string 
   {
@@ -89,4 +89,13 @@ export class TextEditComponent extends EditBase
    */
   constructor(private localizationService: LocalizationService)
   { super(); }
+
+  /**
+   * @inheritdoc
+   */
+  public ngOnChanges() 
+  {
+    if (this.validator)
+      this.error = this.validator(this.value);
+  }
 }

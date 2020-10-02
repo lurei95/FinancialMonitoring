@@ -27,4 +27,7 @@ export const de =
   //DirectionKind
   "Expense": "Ausgabe",
   "Income": "Einkommen",
+
+  //Validation
+  "EmptyField": 'Für das Feld "{{name}}" wird ein Wert benötigt.'
 }

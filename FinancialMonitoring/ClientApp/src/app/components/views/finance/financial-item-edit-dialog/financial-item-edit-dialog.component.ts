@@ -1,3 +1,5 @@
+import { LocalizationService } from 'src/app/services/utility/localization.service';
+import { EmptyValidator } from './../../../controls/validation/empty-validator';
 import { DirectionKind } from './../../../../models/finance/directionKind';
 import { OccurenceKind } from './../../../../models/finance/occurenceKind';
 import { MaskKind } from './../../../controls/text-edit/mask-kind';
@@ -23,6 +25,8 @@ export class FinancialItemEditDialogComponent
 
   private maskKind = MaskKind.Currency
 
+  private titleValidator;
+
   private get value():string { return this._entity.value.toString(); }
 
   private set value(value: string)
@@ -42,13 +46,19 @@ export class FinancialItemEditDialogComponent
    * @param {FinancialItemModel} data: Injected: Model passed as dialog parameter
    * @param {FinancialItemService} service Injected: FiancialItemService
    * @param {NotificationService} notificationService Injected: NotificationService
+   * @param {NotificationService} localizationService Injected: LocalizationService
    * @param {MatDialogRef<FinancialItemEditDialogComponent>} self Injected: dialog
    */
   constructor(@Inject(MAT_DIALOG_DATA) data: FinancialItemModel,
     private service: FinancialItemService, 
     private notificationService: NotificationService,
+    localizationService: LocalizationService,
     private self: MatDialogRef<FinancialItemEditDialogComponent>) 
-  { this._entity = data; }
+  { 
+    this._entity = data;
+    const title = localizationService.execute("FinancialItem.Title");
+    this.titleValidator = new EmptyValidator(title, localizationService).validator;
+  }
 
   private saveAndClose()
   {

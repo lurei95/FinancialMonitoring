@@ -46,8 +46,10 @@
     "@angular/language-service": "8.2.12",
     "@types/jest": "^26.0.14",
     "@types/node": "~12.11.6",
+    "@types/ts-nameof": "^4.2.1",
     "codelyzer": "^5.2.2",
     "jest": "^26.4.2",
+    "ts-nameof": "^5.0.0",
     "typescript": "3.5.3"
   },
   "optionalDependencies": {

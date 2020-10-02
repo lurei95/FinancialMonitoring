@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { LocalizationService } from 'src/app/services/utility/localization.service';
 import { EditBase } from '../edit-base';
 
@@ -10,7 +10,7 @@ import { EditBase } from '../edit-base';
   templateUrl: './combo-edit.component.html',
   styleUrls: ['./combo-edit.component.css', '../edits.css']
 })
-export class ComboEditComponent extends EditBase
+export class ComboEditComponent extends EditBase implements OnChanges
 {
   private _options: {editValue: string, displayValue: string}[] = [];
   /**
@@ -62,4 +62,13 @@ export class ComboEditComponent extends EditBase
    */
   constructor(private localizationService: LocalizationService) 
   { super() }
+
+  /**
+   * @inheritdoc
+   */
+  public ngOnChanges() 
+  {
+    if (this.validator)
+      this.error = this.validator(this.selectedValue);
+  }
 }

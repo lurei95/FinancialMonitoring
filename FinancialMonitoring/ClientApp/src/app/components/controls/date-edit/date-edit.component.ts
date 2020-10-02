@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { EditBase } from '../edit-base';
 
 /**
@@ -9,7 +9,7 @@ import { EditBase } from '../edit-base';
   templateUrl: './date-edit.component.html',
   styleUrls: ['./date-edit.component.css', '../edits.css']
 })
-export class DateEditComponent extends EditBase
+export class DateEditComponent extends EditBase implements OnChanges
 {
   private static minDate: Date = new Date(-8640000000000000);
 
@@ -70,6 +70,15 @@ export class DateEditComponent extends EditBase
    * Date change event
    */
   @Output() dateChanged = new EventEmitter<Date>();
+
+  /**
+   * @inheritdoc
+   */
+  public ngOnChanges() 
+  {
+    if (this.validator)
+      this.error = this.validator(this.selectedDate);
+  }
 
   private handleDateChange(dateText: string) 
   { 

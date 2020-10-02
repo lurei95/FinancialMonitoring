@@ -27,4 +27,7 @@ export const en =
   //DirectionKind
   "Expense": "Expense",
   "Income": "Income",
+
+  //Validation
+  "EmptyField": 'The field "{{name}}" requires a value.'
 }

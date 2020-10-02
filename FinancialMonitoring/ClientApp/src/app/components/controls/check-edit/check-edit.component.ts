@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { EditBase } from '../edit-base';
 
 @Component({
@@ -6,7 +6,7 @@ import { EditBase } from '../edit-base';
   templateUrl: './check-edit.component.html',
   styleUrls: ['./check-edit.component.css', '../edits.css']
 })
-export class CheckEditComponent extends EditBase
+export class CheckEditComponent extends EditBase implements OnChanges
 {
   private _checked: boolean;
   /**
@@ -31,4 +31,13 @@ export class CheckEditComponent extends EditBase
    * The checked change event
    */
   @Output() checkedChange: EventEmitter<boolean> = new EventEmitter();
+
+  /**
+   * @inheritdoc
+   */
+  public ngOnChanges() 
+  {
+    if (this.validator)
+      this.error = this.validator(this.checked);
+  }
 }
