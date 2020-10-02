@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinancialMonitoring.Migrations
 {
     [DbContext(typeof(FinancialMonitoringDBContext))]
-    [Migration("20201001153404_InitialCreate")]
+    [Migration("20201002151508_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,9 @@ namespace FinancialMonitoring.Migrations
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Direction")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");

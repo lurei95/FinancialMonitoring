@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\components\utility\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

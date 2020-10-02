@@ -15,11 +15,16 @@ export const de =
     "Title": "Titel",
     "Due": "Fällig",
     "Value": "Wert",
-    "OccurenceKind": "Art"
+    "OccurenceKind": "Art",
+    "Direction": "Richtung"
   },
 
   //OccurenceKind
   "OneTime": "Einmalig",
   "Monthly": "Monatlich",
   "Yearly": "Jährlich",
+
+  //DirectionKind
+  "Expense": "Ausgabe",
+  "Income": "Einkommen",
 }

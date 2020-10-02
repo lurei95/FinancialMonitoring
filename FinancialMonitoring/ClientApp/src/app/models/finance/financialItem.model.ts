@@ -1,3 +1,4 @@
+import { DirectionKind } from './directionKind';
 import { OccurenceKind } from './occurenceKind';
 import { FinancialCategoryModel } from "./financialCatgegory.model";
 import { AttachmentItemModel } from "./attachmentItem.model";
@@ -56,6 +57,16 @@ export class FinancialItemModel
    * @param {Date} value Date when the item was due
    */
   set dueDate(value: Date){ this._dueDate = value; }
+
+  private _direction: DirectionKind = DirectionKind.Expense;
+  /**
+   * @returns {DirectionKind} The direction of the monitary flow
+   */
+  get direction(): DirectionKind { return this._direction; }
+  /**
+   * @param {DirectionKind} value The direction of the monitary flow
+   */
+  set direction(value: DirectionKind) { this._direction = value; }
 
   private _occurenceKind: OccurenceKind = OccurenceKind.OneTime;
   /**

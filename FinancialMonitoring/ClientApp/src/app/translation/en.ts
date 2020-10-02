@@ -15,11 +15,16 @@ export const en =
     "Title": "Title",
     "Due": "Due",
     "Value": "Value",
-    "OccurenceKind": "Repeat"
+    "OccurenceKind": "Repeat",
+    "Direction": "Direction"
   },
 
   //OccurenceKind
   "OneTime": "One time",
   "Monthly": "Monthly",
   "Yearly": "Yearly",
+
+  //DirectionKind
+  "Expense": "Expense",
+  "Income": "Income",
 }

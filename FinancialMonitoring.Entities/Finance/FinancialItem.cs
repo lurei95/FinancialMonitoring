@@ -46,6 +46,12 @@ namespace FinancialMonitoring.Entities.Finance
     [JsonProperty("_occurenceKind")]
     public OccurenceKind OccurenceKind { get; set; }
 
+    /// <summary>
+    /// The direction of the monitary flow
+    /// </summary>
+    [JsonProperty("_direction")]
+    public DirectionKind Direction { get; set; }
+
     ///<inheritdoc/>
     public object Id => FinancialItemId;
 

@@ -32,6 +32,9 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.Property(item => item.OccurenceKind)
         .IsRequired();
 
+      builder.Property(item => item.Direction)
+        .IsRequired();
+
       builder.Property(item => item.DueDate)
         .IsRequired();
 

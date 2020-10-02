@@ -1,3 +1,4 @@
+import { DirectionKind } from './../../../../models/finance/directionKind';
 import { OccurenceKind } from './../../../../models/finance/occurenceKind';
 import { MaskKind } from './../../../controls/text-edit/mask-kind';
 import { map, tap } from 'rxjs/operators';
@@ -32,6 +33,8 @@ export class FinancialItemEditDialogComponent
   }
 
   private occurenceKindType = OccurenceKind
+
+  private directionKindType = DirectionKind
 
   /**
    * Constructor
@@ -78,6 +81,9 @@ export class FinancialItemEditDialogComponent
 
   private onOccurenceKindChanged(occurenceKind: OccurenceKind) 
   { this._entity.occurenceKind = occurenceKind; }
+
+  private onDirectionKindChanged(directionKind: DirectionKind) 
+  { this._entity.direction = directionKind; }
 
   private handleDateChanged(date: Date) { this._entity.dueDate = date; }
 }

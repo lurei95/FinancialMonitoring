@@ -89,6 +89,7 @@ namespace FinancialMonitoring.Migrations
                     Value = table.Column<decimal>(nullable: false),
                     DueDate = table.Column<DateTime>(nullable: false),
                     OccurenceKind = table.Column<int>(nullable: false),
+                    Direction = table.Column<int>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
