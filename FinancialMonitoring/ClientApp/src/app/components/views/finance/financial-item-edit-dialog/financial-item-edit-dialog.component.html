@@ -1,6 +1,6 @@
 <app-edit-dialog-content (close)="close()" (save)="save()" 
-  (saveAndClose)="saveAndClose()" [title]="_entity.title">
-  <form class="d-flex flex-column flex-fill ml-2">
+  (saveAndClose)="saveAndClose()" [title]="title">
+  <form class="d-flex flex-column flex-fill ml-2" body>
     <h2 class="ml-3 mb-2 mt-3">{{'Title' | translate}}</h2>
     <app-text-edit [(value)]="_entity.title" [maxLength]="30" [validator]="titleValidator"
       [captionWidth]="100" [caption]="('FinancialItem.Title' | translate)">
@@ -32,4 +32,5 @@
       </div>
     </div>
   </form>
+  <button class="btn btn-primary pl-3 pr-3 pt-2 pb-2 ml-2 mr-2" footer>Add Attachment</button>
 </app-edit-dialog-content>

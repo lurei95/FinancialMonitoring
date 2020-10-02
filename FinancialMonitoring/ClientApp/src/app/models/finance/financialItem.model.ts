@@ -28,7 +28,7 @@ export class FinancialItemModel
    */
   set categoryId(value: string) { this._categoryId = value; }
 
-  private _title: string;
+  private _title: string = "";
   /**
    * @returns {string} The title of the item
    */

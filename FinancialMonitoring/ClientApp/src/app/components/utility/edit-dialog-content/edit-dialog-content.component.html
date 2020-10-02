@@ -16,10 +16,11 @@
       </button>
     </div>
     <div class="d-flex flex-fill">
-      <ng-content></ng-content>
+      <ng-content select="[body]"></ng-content>
     </div>
     <div class="d-flex flex-row-reverse p-3 border-top">
-      <button type="submit" class="btn btn-primary pl-3 pr-3 pt-2 pb-2" (click)="handleSaveShortcut()">Save</button>
+      <button type="submit" class="btn btn-primary pl-3 pr-3 pt-2 pb-2 ml-2 mr-2" (click)="handleSaveShortcut()">Save</button>
+      <ng-content select="[footer]"></ng-content>
     </div>
   </div>
 </mat-dialog-content>

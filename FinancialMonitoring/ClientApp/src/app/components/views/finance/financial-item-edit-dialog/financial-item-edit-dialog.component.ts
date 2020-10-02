@@ -21,6 +21,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class FinancialItemEditDialogComponent
 {
+  private get title(): string 
+  { return this.localizationService.execute("FinancialItem_Title", { title: this._entity.title }); } 
+
   private _entity: FinancialItemModel;
 
   private maskKind = MaskKind.Currency
@@ -48,13 +51,15 @@ export class FinancialItemEditDialogComponent
    * @param {FinancialItemModel} data: Injected: Model passed as dialog parameter
    * @param {FinancialItemService} service Injected: FiancialItemService
    * @param {NotificationService} notificationService Injected: NotificationService
-   * @param {RequiredValidator} requiredValidatorInjected: RequiredValidator
+   * @param {RequiredValidator} requiredValidatorInjected: Injected: RequiredValidator
+   * @param {LocalizationService} localizationService Injected: LocalizationService
    * @param {MatDialogRef<FinancialItemEditDialogComponent>} self Injected: dialog
    */
   constructor(@Inject(MAT_DIALOG_DATA) data: FinancialItemModel,
     private service: FinancialItemService, 
     private notificationService: NotificationService,
     requiredValidator: RequiredValidator,
+    private localizationService: LocalizationService,
     private self: MatDialogRef<FinancialItemEditDialogComponent>) 
   { 
     this._entity = data;

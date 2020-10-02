@@ -29,5 +29,8 @@ export const de =
   "Income": "Einkommen",
 
   //Validation
-  "EmptyField": 'Für das Feld "{{name}}" wird ein Wert benötigt.'
+  "EmptyField": 'Für das Feld "{{name}}" wird ein Wert benötigt.',
+
+  //Titles
+  "FinancialItem_Title": 'Position "{{title}}"'
 }
