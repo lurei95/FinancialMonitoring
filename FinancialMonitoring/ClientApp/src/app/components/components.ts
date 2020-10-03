@@ -1,3 +1,4 @@
+import { SearchGridComponent } from './data/search-grid/search-grid.component';
 import { TabCardComponent } from './containers/tab-card/tab-card.component';
 import { CategoriesComponent } from './views/finance/categories/categories.component';
 import { AppComponent } from "../app.component";
@@ -40,7 +41,8 @@ export const components = [
   ErrorNotificationComponent,
   CategoriesComponent,
   TabCardComponent,
-  TabComponent
+  TabComponent,
+  SearchGridComponent
 ]
 
 /**

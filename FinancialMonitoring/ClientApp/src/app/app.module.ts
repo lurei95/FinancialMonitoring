@@ -19,6 +19,7 @@ import { registerLocaleData } from '@angular/common';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import { components, entryComponents } from './components/components';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 registerLocaleData(localeDe);
 
@@ -40,6 +41,7 @@ const imports = [
   MatTableModule,
   MatSortModule,
   MatDialogModule,
+  MatPaginatorModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MatCheckboxModule,

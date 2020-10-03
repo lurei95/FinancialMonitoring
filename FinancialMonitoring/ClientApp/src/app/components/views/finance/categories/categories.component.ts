@@ -1,9 +1,10 @@
+import { NotificationService } from './../../../../services/utility/notification.service';
+import { map, tap } from 'rxjs/operators';
 import { FinancialCategoryService } from './../../../../services/finance/financialCategory.service';
 import { FinancialCategoryModel } from './../../../../models/finance/financialCatgegory.model';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Component} from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
-import { debounceTime,  distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { ApiReply } from 'src/app/models/utility/apiReply';
 
 /**
  * Components for displaying a list of categories
@@ -15,29 +16,29 @@ import { debounceTime,  distinctUntilChanged, switchMap } from 'rxjs/operators';
 })
 export class CategoriesComponent
 {
-  private searchText$: Subject<string> = new Subject<string>();
+  private columns: string[] = ["title", "value", "items", "edit", "add-item", "delete"];
 
-  private displayedColumns: string[] = ['title', "value", "items", "edit", "delete"];
-
-  private dataSource: MatTableDataSource<FinancialCategoryModel> = new MatTableDataSource([]);
-
-  private categories: Observable<FinancialCategoryModel[]> = of([new FinancialCategoryModel()]);
+  private searchFunction: (param: string) => Observable<FinancialCategoryModel[]>;
 
   /**
    * Constructor
    * 
    * @param {FinancialCategoryService} service Injected: FinancialCategoryService
    */
-  constructor(service: FinancialCategoryService)
+  constructor(service: FinancialCategoryService, notificationService: NotificationService)
   {
-    this.categories.subscribe(result => this.dataSource.data = result);
-
-    this.searchText$.pipe(
-      debounceTime(1000), 
-      distinctUntilChanged(),
-      switchMap(searchText => service.retrieve([{ name: "searchText", value: searchText}]))
-    ).subscribe(categories => this.dataSource.data = categories.result);
+    this.searchFunction = (param: string) => 
+    {
+      let result: Observable<ApiReply<FinancialCategoryModel[]>>;
+      if (param)
+        result = service.retrieve([{name: "searchText", value: param}]);
+      else
+        result = service.retrieve();
+      return result.pipe(tap(reply => 
+      {
+        if (!reply.successful)
+          notificationService.notifyErrorMessage(reply.message);
+      }), map(reply => reply.result));
+    }
   }
-
-  private searchTextChange(searchText: string) { this.searchText$.next(searchText); }
 }

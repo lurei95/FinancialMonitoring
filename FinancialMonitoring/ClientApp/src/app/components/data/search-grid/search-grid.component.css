@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.mat-cell, .mat-header-cell {
+  padding: 0.6rem 1rem;
+  text-align: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mat-column-edit {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}
+
+:host >>> .mat-sort-header-container {
+  font-size: 1rem;
+}
+
+.mat-paginator, .mat-table {
+  border : 1px solid rgba(0, 0, 0, 0.12);
+}
