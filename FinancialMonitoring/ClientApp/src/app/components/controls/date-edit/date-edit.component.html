@@ -5,7 +5,7 @@
   <app-error-notification [error]="error"></app-error-notification>
   <input id="dateInput" [min]="minDate" [max]="maxDate"
     [ngClass]="{'form-control': true, 'input-with-suffix': true, 'error': this.error}" 
-    [value]="selectedDate" [matDatepicker]="picker" [placeholder]="error"
+    [value]="selectedDate" [matDatepicker]="picker" [placeholder]="error ? error : ''"
     (dateInput)="handleDateChange($event.target.value)" 
     (dateChange)="handleDateChange($event.target.value)"
     disabled>

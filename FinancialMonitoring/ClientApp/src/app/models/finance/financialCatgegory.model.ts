@@ -30,9 +30,13 @@ export class FinancialCategoryModel
   /**
    * @returns {number} The total value of the category
    */
-  get value(): number { return 0; }
+  get value(): number 
+  { 
+    return this.items.reduce((sum, current) => sum + current.value, 0)
+      + this.childCategories.reduce((sum, current) => sum + current.value, 0); 
+  }
 
-  private _parentId;
+  private _parentId: string;
   /**
    * @returns {string} The id of the parent category
    */
@@ -42,7 +46,7 @@ export class FinancialCategoryModel
    */
   set parentId(value: string) { this._parentId = value; }
 
-  private _userId;
+  private _userId: string;
   /**
    * @returns {string} The id of the user
    */
@@ -62,7 +66,7 @@ export class FinancialCategoryModel
    */
   set parent(value: FinancialCategoryModel) { this._parent = value; }
 
-  private _childCategories: FinancialCategoryModel[];
+  private _childCategories: FinancialCategoryModel[] = [];
   /**
    * @returns {FinancialCategoryModel[]} The child categories
    */
@@ -72,7 +76,7 @@ export class FinancialCategoryModel
    */
   set childCategories(value: FinancialCategoryModel[]) { this._childCategories = value; }
 
-  private _items: FinancialItemModel[];
+  private _items: FinancialItemModel[] = [];
   /**
    * @returns {FinancialItemModel[]} The items within the category
    */
@@ -82,7 +86,7 @@ export class FinancialCategoryModel
    */
   set items(value: FinancialItemModel[]) { this._items = value; }
 
-  private _attachments: AttachmentItemModel[];
+  private _attachments: AttachmentItemModel[] = [];
   /**
    * @returns {AttachmentItemModel[]} The attachments to the category
    */

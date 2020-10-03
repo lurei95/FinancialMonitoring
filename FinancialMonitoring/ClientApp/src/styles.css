@@ -29,6 +29,11 @@ code {
   width: 100%;
 }
 
+.flex-host {
+  display: flex;
+  flex-grow: 1;
+}
+
 @media (min-width: 768px) {
   .fullscreen-row {
     flex-direction: row !important;

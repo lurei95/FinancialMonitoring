@@ -5,6 +5,13 @@
   border-bottom: 1px solid lightgray;
   min-height: 60vh;
   min-width: 60vw;
+  width: 60vw;
+}
+
+h2{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 70%;
 }
 
 .expanded {

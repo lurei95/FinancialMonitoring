@@ -16,6 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { NgxMaskModule } from 'ngx-mask';
 import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
 import { components, entryComponents } from './components/components';
 
 registerLocaleData(localeDe);
@@ -35,6 +37,8 @@ const imports = [
   NgxMaskModule.forRoot(),
   MatSelectModule,
   MatButtonModule,
+  MatTableModule,
+  MatSortModule,
   MatDialogModule,
   MatDatepickerModule,
   MatNativeDateModule,

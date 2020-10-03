@@ -1,0 +1,42 @@
+<app-tab-card title="Title">
+  <app-tab title="Main">
+    <app-text-edit [captionWidth]="75" [caption]="'Search'" (searchTextChange)="searchTextChange">
+    </app-text-edit>
+    <table mat-table matSort [dataSource]="dataSource">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let category"> {{category.title}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+        <td mat-cell *matCellDef="let category"> {{category.value}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="items">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Items </th>
+        <td mat-cell *matCellDef="let category"> {{category.items.length}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef style="width: 100px">test</th>
+        <td mat-cell *matCellDef="let category" style="width: 100px">
+          <button class="btn btn-primary">Edit</button>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef style="width: 100px">test1</th>
+        <td mat-cell *matCellDef="let category" style="width: 100px">
+          <button class="btn btn-primary">Delete</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </app-tab>
+  <app-tab title="Section2">
+    Test
+  </app-tab>
+</app-tab-card>

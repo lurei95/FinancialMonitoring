@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-grow: 1
+}
+
+.card-header {
+  border-radius: unset !important;
+}
+
+.card-fullsize {
+  min-height: calc(100vh - 60px);
+  width:100%;
+  border: none;
+  border-radius: unset;
+}
+
+.card-body {
+  flex-grow: 1 !important;
+}
+
+.title-col {
+  flex: 0 0 auto !important;
+  width: auto !important;
+}
+
+.card-fullsize {
+  min-height: calc(100vh - 84px);
+  max-height: inherit;
+}

@@ -1,3 +1,5 @@
+import { TabCardComponent } from './containers/tab-card/tab-card.component';
+import { CategoriesComponent } from './views/finance/categories/categories.component';
 import { AppComponent } from "../app.component";
 import { CheckEditComponent } from "./controls/check-edit/check-edit.component";
 import { ComboEditComponent } from "./controls/combo-edit/combo-edit.component";
@@ -13,6 +15,7 @@ import { LoginComponent } from "./views/authentication/login/login.component";
 import { SignupComponent } from "./views/authentication/signup/signup.component";
 import { FinancialItemEditDialogComponent } from "./views/finance/financial-item-edit-dialog/financial-item-edit-dialog.component";
 import { HomeComponent } from "./views/home/home.component";
+import { TabComponent } from './containers/tab/tab.component';
 
 /**
  * List of the components
@@ -34,7 +37,10 @@ export const components = [
   ComboEditComponent,
   DateEditComponent,
   CheckEditComponent,
-  ErrorNotificationComponent
+  ErrorNotificationComponent,
+  CategoriesComponent,
+  TabCardComponent,
+  TabComponent
 ]
 
 /**

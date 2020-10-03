@@ -3,9 +3,9 @@
     {{caption}}
   </span>
   <app-error-notification [error]="error"></app-error-notification>
-  <input [maxlength]="maxlength" autocomplete="off" type="text" [mask]="mask"
+  <input [maxlength]="maxLength" autocomplete="off" type="text" [mask]="mask"
     [(ngModel)]="value" [disabled]="!isEnabled" 
-    [dropSpecialCharacters]="false" [placeholder]="error"
+    [dropSpecialCharacters]="false" [placeholder]="error ? error : ''"
     [ngClass]="{'form-control': true, 'input-with-suffix': this.suffix, 'error': this.error}"/>
   <div [ngClass]="{'error': error, 'suffix m-0 p-0 d-flex align-items-center': true}" *ngIf="suffix != null">
     <div [ngClass]="{'suffix-inner': true, 'error': error}">

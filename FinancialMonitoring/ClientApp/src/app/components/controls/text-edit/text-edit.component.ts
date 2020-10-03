@@ -38,7 +38,7 @@ export class TextEditComponent extends EditBase implements OnChanges
     }
   }
 
-  private _maxLength: number = 20;
+  private _maxLength: number = 40;
   /**
    * The max length of the input text
    */
