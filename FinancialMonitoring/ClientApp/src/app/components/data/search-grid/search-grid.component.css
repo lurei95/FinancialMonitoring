@@ -4,10 +4,15 @@
   flex-grow: 1;
 }
 
-.mat-cell, .mat-header-cell {
-  padding: 0.6rem 1rem;
+:host >>> .mat-cell, :host >>> .mat-header-cell {
+  padding: 0.5rem 1rem!important;
   text-align: center;
   border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+:host >>> .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
 }
 
 .mat-column-edit {

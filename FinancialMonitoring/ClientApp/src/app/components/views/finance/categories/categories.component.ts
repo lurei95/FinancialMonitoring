@@ -1,10 +1,15 @@
+import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
+import { Router } from '@angular/router';
+import { SearchGridComponent } from './../../../data/search-grid/search-grid.component';
+import { FinancialCategoryModel } from 'src/app/models/finance/financialCatgegory.model';
 import { NotificationService } from './../../../../services/utility/notification.service';
-import { map, tap } from 'rxjs/operators';
+import { map, tap  } from 'rxjs/operators';
 import { FinancialCategoryService } from './../../../../services/finance/financialCategory.service';
-import { FinancialCategoryModel } from './../../../../models/finance/financialCatgegory.model';
 import { Observable } from 'rxjs';
-import { Component} from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { ApiReply } from 'src/app/models/utility/apiReply';
+import { MatDialog } from '@angular/material';
+import { FinancialItemEditDialogComponent } from '../financial-item-edit-dialog/financial-item-edit-dialog.component';
 
 /**
  * Components for displaying a list of categories
@@ -16,29 +21,62 @@ import { ApiReply } from 'src/app/models/utility/apiReply';
 })
 export class CategoriesComponent
 {
-  private columns: string[] = ["title", "value", "items", "edit", "add-item", "delete"];
+  private columns: string[] = ["new", "title", "value", "items", "edit", "add-item", "delete"];
 
   private searchFunction: (param: string) => Observable<FinancialCategoryModel[]>;
+
+  @ViewChild(SearchGridComponent, {static: false}) private grid: SearchGridComponent;
 
   /**
    * Constructor
    * 
    * @param {FinancialCategoryService} service Injected: FinancialCategoryService
+   * @param {FinancialCategoryService} service Injected: NotificationService
    */
-  constructor(service: FinancialCategoryService, notificationService: NotificationService)
+  constructor(private service: FinancialCategoryService, 
+    private router: Router, private dialog: MatDialog,
+    private notificationService: NotificationService)
   {
     this.searchFunction = (param: string) => 
     {
-      let result: Observable<ApiReply<FinancialCategoryModel[]>>;
+      let result$: Observable<ApiReply<FinancialCategoryModel[]>>;
       if (param)
-        result = service.retrieve([{name: "searchText", value: param}]);
+        result$ = service.retrieve([{name: "searchText", value: param}]);
       else
-        result = service.retrieve();
-      return result.pipe(tap(reply => 
-      {
-        if (!reply.successful)
-          notificationService.notifyErrorMessage(reply.message);
-      }), map(reply => reply.result));
+        result$ = service.retrieve();
+      return result$.pipe(tap(reply => this.handleApiReply(reply)), map(reply => reply.result));
     }
+  }
+
+  private delete(model: FinancialCategoryModel)
+  { 
+    this.grid.removeItem(model);
+    this.service.delete(model.financialCategoryId).pipe(tap(reply => this.handleApiReply(reply))); 
+  }
+
+  private edit(model: FinancialCategoryModel)
+  { 
+    this.router.navigateByUrl(
+      this.router.url + "/" + model.financialCategoryId);
+  }
+
+  private new()
+  { this.router.navigateByUrl(this.router.url + "/new"); }
+
+  private addItem(model: FinancialCategoryModel)
+  { 
+    let item: FinancialItemModel = new FinancialItemModel();
+    item.categoryId = model.financialCategoryId;
+    this.dialog.open(FinancialItemEditDialogComponent, {
+      panelClass: 'fullscreenDialog',
+      data: item,
+      disableClose: true
+    });
+  }
+
+  private handleApiReply(reply: ApiReply<any>)
+  {
+    if (!reply.successful)
+      this.notificationService.notifyErrorMessage(reply.message);
   }
 }

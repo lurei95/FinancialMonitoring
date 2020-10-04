@@ -1,5 +1,5 @@
 import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
-import { AfterContentInit, AfterViewInit, Component, ContentChildren, Input, QueryList, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChildren, Input, QueryList, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatColumnDef, MatPaginator, MatTable, MatTableDataSource } from '@angular/material';
 import { Subject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -65,6 +65,14 @@ export class SearchGridComponent implements AfterViewInit, AfterContentInit
    */
   public ngAfterViewInit() 
   { this.dataSource.paginator = this.paginator; }
+
+  /**
+   * Removes an item from the grid
+   * 
+   * @param {any} itemToRemove The item that should be removed
+   */
+  public removeItem(itemToRemove: any)
+  { this.dataSource.data = this.dataSource.data.filter(item => item != itemToRemove); }
 
   private searchTextChange(searchText: string) { this.searchText$.next(searchText); }
 }
