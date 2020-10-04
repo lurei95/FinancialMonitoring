@@ -11,7 +11,6 @@ describe('NotificationService', () =>
 
   beforeEach(() => 
   {
-    console.log("test")
     spy = spyOn(store, "update");
     service = new NotificationService(store);
     (service as any).timeout = 20;

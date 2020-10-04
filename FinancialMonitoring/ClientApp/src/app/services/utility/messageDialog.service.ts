@@ -1,7 +1,7 @@
 
-import { DialogInformation } from "src/app/components/utility/message-dialog/dialogInformation";
-import { DialogResult } from "src/app/components/utility/message-dialog/dialogResult";
-import { MessageDialogComponent } from "src/app/components/utility/message-dialog/message-dialog.component";
+import { DialogInformation } from "./../../components/utility/message-dialog/dialogInformation";
+import { DialogResult } from "./../../components/utility/message-dialog/dialogResult";
+import { MessageDialogComponent } from "./../../components/utility/message-dialog/message-dialog.component";
 import { MatDialog } from '@angular/material/dialog/';
 import { Injectable } from "@angular/core";
 
