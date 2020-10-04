@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material';
 import { MessageDialogService } from './messageDialog.service';
 import { of } from 'rxjs';
 
-describe('NotificationService', () => 
+describe('MessageDialogService', () => 
 {
   let service : MessageDialogService;
   let dialog: MatDialog = { open(a: any, b: any) {}} as MatDialog;
@@ -15,7 +15,6 @@ describe('NotificationService', () =>
 
   beforeEach(() => 
   {
-    console.log("test")
     spy = spyOn(dialog, "open").and.returnValue(ref);
     service = new MessageDialogService(dialog);
   })
