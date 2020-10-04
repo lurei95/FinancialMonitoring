@@ -1,12 +1,12 @@
 import { FinancialItemModel } from "./financialItem.model";
 import { AttachmentItemModel } from "./attachmentItem.model";
+import { DirectionKind } from "./directionKind";
 
 /**
 * A catgory in which multiple financial items can be organized
 */
 export class FinancialCategoryModel
 {
-
   private _financialCategoryId: string;
   /**
    * @returns {string} The id of the category
@@ -32,8 +32,15 @@ export class FinancialCategoryModel
    */
   get value(): number 
   { 
-    return this.items.reduce((sum, current) => sum + current.value, 0)
-      + this.childCategories.reduce((sum, current) => sum + current.value, 0); 
+    let ownSum: number = this.items.reduce((sum, current) => 
+    { 
+      if (current.direction == DirectionKind.Income)
+        return sum + current.value;
+      else
+        return sum - current.value;
+    }, 0);
+
+    return ownSum + this.childCategories.reduce((sum, current) => sum + current.value, 0); 
   }
 
   private _parentId: string;

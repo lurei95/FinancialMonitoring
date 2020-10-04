@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LocalizationService } from 'src/app/services/utility/localization.service';
+import { LocalizationService } from '../utility/localization.service';
 
 /**
  * A validator for validating that a field cannot be empty

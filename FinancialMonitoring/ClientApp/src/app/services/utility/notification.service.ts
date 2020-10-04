@@ -11,6 +11,8 @@ import { NotificationStore } from '../../store/utility/notification.store';
 })
 export class NotificationService 
 {
+  private timeout = 5000;
+
   /**
    * Constructor
    * 
@@ -58,6 +60,6 @@ export class NotificationService
   private notifyCore(message: string, notificationKind: NotificationKind)
   {
     this.store.update({ notification: new NotificationModel(message, notificationKind) });
-    setTimeout(() => this.store.update({ notification: null }), 5000);
+    setTimeout(() => this.store.update({ notification: null }), this.timeout);
   }
 }
