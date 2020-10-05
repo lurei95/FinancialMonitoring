@@ -21,18 +21,6 @@ export class AuthenticationService
   private get path(): string { return "Users/"; }
 
   /**
-   * @returns {Observable<string>} Observable for the current access token
-   */
-  getAccessToken(): Observable<string>
-  {
-    if (!this._currentUser)
-      return of(null);
-    if (!this.tokenExpired(this._currentUser.accessToken))
-      return of(this._currentUser.accessToken);
-    return this.refreshAccessToken();
-  }
-
-  /**
    * Constructor
    * 
    * @param {ApiService} apiService Injected: ApiService
@@ -72,6 +60,18 @@ export class AuthenticationService
     }));
   }
 
+  /**
+   * @returns {Observable<string>} Observable for the current access token
+   */
+  public getAccessToken(): Observable<string>
+  {
+    if (!this._currentUser)
+      return of(null);
+    if (!this.tokenExpired(this._currentUser.accessToken))
+      return of(this._currentUser.accessToken);
+    return this.refreshAccessToken();
+  }
+
   private refreshAccessToken() : Observable<string>
   {
     const request = new RefreshRequest(this._currentUser.accessToken, this._currentUser.refreshToken);
@@ -92,7 +92,12 @@ export class AuthenticationService
 
   private tokenExpired(token: string) 
   {
-    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    const tokenPart = token.split('.')[1];
+    const decoded = atob(tokenPart);
+    let expiry = JSON.parse(decoded).exp;
+    if (!expiry)
+      expiry = JSON.parse(decoded).iat;
+
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 }
