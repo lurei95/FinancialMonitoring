@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient,  HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { ApiReply } from 'src/app/models/utility/apiReply';
+import { ApiReply } from './../../models/utility/apiReply';
 
 /**
  * Service for making calls to the api
@@ -31,7 +31,7 @@ export class ApiService
   public get<TResult>(path: string, type: (new () => TResult), headers?: HttpHeaders)
     : Observable<ApiReply<TResult>> 
   {
-    return this.client.delete<string>(this.getUrl(path), { observe: 'response', headers: headers })
+    return this.client.get<string>(this.getUrl(path), { observe: 'response', headers: headers })
       .pipe(map(reply => this.handleReply(reply, type)));
   }
 
@@ -85,7 +85,6 @@ export class ApiService
     //Internal Server error
     if (response.status == 500)
       return new ApiReply(null, false, response.body.toString());
-    console.log("api-error: " + response.body);
     if(response.ok)
     {
       let result: TResult = new type();
