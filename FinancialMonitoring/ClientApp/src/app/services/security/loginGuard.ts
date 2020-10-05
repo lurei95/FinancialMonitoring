@@ -26,7 +26,7 @@ export class LoginGuard implements CanActivate
    */
   canActivate(): Promise<boolean | UrlTree>
   {
-    return this.authenticationService.accessToken$.pipe(map(token => 
+    return this.authenticationService.getAccessToken().pipe(map(token => 
     {
       if (!token)
         return true;

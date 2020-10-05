@@ -25,8 +25,7 @@ export class ApplicationGuard implements CanActivate
    */
   canActivate(): Promise<boolean | UrlTree>
   {
-    console.log("appguard");
-    return this.authenticationService.accessToken$.pipe(map(token => 
+    return this.authenticationService.getAccessToken().pipe(map(token => 
     {
       if (token)
         return true;
