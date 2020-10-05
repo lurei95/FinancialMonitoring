@@ -23,7 +23,7 @@ export class AuthenticationService
   /**
    * @returns {Observable<string>} Observable for the current access token
    */
-  get accessToken$(): Observable<string>
+  getAccessToken(): Observable<string>
   {
     if (!this._currentUser)
       return of(null);

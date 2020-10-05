@@ -101,9 +101,8 @@ export abstract class ModelServiceBase<TModel>
   protected withAuthentication<TResult>(call: (headers: HttpHeaders) => Observable<ApiReply<TResult>>)
     : Observable<ApiReply<TResult>> 
   {
-    return this.authenticationService.accessToken$.pipe(
-      switchMap(token => call(this.getOptions(token))),
-    );
+    return this.authenticationService.getAccessToken()
+      .pipe(switchMap(token => call(this.getOptions(token))));
   }
 
   private getOptions(accessToken: string): HttpHeaders 
