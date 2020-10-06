@@ -17,6 +17,11 @@ export class ComboEditComponent extends EditBase implements OnChanges
    * @returns {{editValue: string, displayValue: string}[]} The selectable options of the ComboBox
    */
   get options(): { editValue: string, displayValue: string; }[] { return this._options; }
+  
+  /**
+   * @param {{editValue: string, displayValue: string}[]} value The selectable options of the ComboBox
+   */
+  set options(value: { editValue: string, displayValue: string; }[]) { this._options = value; }
 
   /**
    * @param {any} value The type of the enum used for generating the selectable options 

@@ -16,7 +16,8 @@ export const en =
     "Due": "Due",
     "Value": "Value",
     "OccurenceKind": "Repeat",
-    "Direction": "Direction"
+    "Direction": "Direction",
+    "Category": "Category"
   },
 
   //OccurenceKind

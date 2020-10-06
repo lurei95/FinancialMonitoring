@@ -16,7 +16,8 @@ export const de =
     "Due": "Fällig",
     "Value": "Wert",
     "OccurenceKind": "Art",
-    "Direction": "Richtung"
+    "Direction": "Richtung",
+    "Category": "Kategorie"
   },
 
   //OccurenceKind
