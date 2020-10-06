@@ -1,3 +1,4 @@
+import { DataGridComponent } from './data/data-grid/data-grid.component';
 import { CategoryEditComponent } from './views/finance/category-edit/category-edit.component';
 import { SearchGridComponent } from './data/search-grid/search-grid.component';
 import { TabCardComponent } from './containers/tab-card/tab-card.component';
@@ -44,7 +45,8 @@ export const components = [
   TabCardComponent,
   TabComponent,
   SearchGridComponent,
-  CategoryEditComponent
+  CategoryEditComponent,
+  DataGridComponent
 ]
 
 /**
