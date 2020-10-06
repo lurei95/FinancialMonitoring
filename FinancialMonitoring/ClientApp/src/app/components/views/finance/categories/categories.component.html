@@ -1,4 +1,4 @@
-<app-tab-card title="Title">
+<app-tab-card [title]="('SearchCategories' | translate)">
   <app-search-grid matSort [columns]="columns" [searchFunction]="searchFunction">
     <ng-container matColumnDef="new">
       <th mat-header-cell *matHeaderCellDef [style.width]="'100px'">

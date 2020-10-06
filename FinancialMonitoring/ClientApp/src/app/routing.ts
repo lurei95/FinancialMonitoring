@@ -1,3 +1,4 @@
+import { CategoryEditComponent } from './components/views/finance/category-edit/category-edit.component';
 import { CategoriesComponent } from './components/views/finance/categories/categories.component';
 import { LoginComponent } from "./components/views/authentication/login/login.component";
 import { SignupComponent } from "./components/views/authentication/signup/signup.component";
@@ -11,6 +12,7 @@ import { LoginGuard } from "./services/security/loginGuard";
 export const routing = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'categories/:id', component: CategoryEditComponent },
   { path: 'home', component: HomeComponent, canActivate: [ApplicationGuard] },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [LoginGuard] },

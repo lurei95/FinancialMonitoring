@@ -1,3 +1,4 @@
+import { CategoryEditComponent } from './views/finance/category-edit/category-edit.component';
 import { SearchGridComponent } from './data/search-grid/search-grid.component';
 import { TabCardComponent } from './containers/tab-card/tab-card.component';
 import { CategoriesComponent } from './views/finance/categories/categories.component';
@@ -42,7 +43,8 @@ export const components = [
   CategoriesComponent,
   TabCardComponent,
   TabComponent,
-  SearchGridComponent
+  SearchGridComponent,
+  CategoryEditComponent
 ]
 
 /**

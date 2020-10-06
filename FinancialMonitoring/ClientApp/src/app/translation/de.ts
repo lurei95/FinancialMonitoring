@@ -4,6 +4,8 @@ export const de =
   "Title": "Titel",
   "Properties": "Eigenschaften",
 
+  "SearchCategories": "Kategorien suchen",
+
   //Dialog options
   "Delete": "Löschen",
   "Yes": "Ja",
