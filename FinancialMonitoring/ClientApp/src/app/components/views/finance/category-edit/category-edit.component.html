@@ -1,9 +1,46 @@
 <app-tab-card [title]="title">
   <app-tab title="Main Properties">
+    <h2 class="ml-3 mb-2 mt-3">{{'Title' | translate}}</h2>
     <app-text-edit 
-      [captionWidth]="100" [caption]="('FinancialItem.Title' | translate)">
+      [captionWidth]="100" [caption]="('FinancialCategory.Title' | translate)">
     </app-text-edit>
+    <h2 class="ml-3 mb-2 mt-3">{{'FinancialCategory.Items' | translate}}</h2>
+    <app-data-grid matSort [columns]="columns" [dataSource]="dataSource">
+      <ng-container matColumnDef="new">
+        <th mat-header-cell *matHeaderCellDef [style.width]="'100px'">
+          <button class="btn grid-new-button">{{'Actions.New' | translate}}</button>
+        </th>
+        <td mat-cell *matCellDef="let item"></td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialItem.Title' | translate}}</th>
+        <td mat-cell *matCellDef="let item"> {{item.title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="direction">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialItem.Direction' | translate}} </th>
+        <td mat-cell *matCellDef="let item"> {{item.direction}} </td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialItem.Value' | translate}}</th>
+        <td mat-cell *matCellDef="let item"> {{item.value}} </td>
+      </ng-container>
+      <ng-container matColumnDef="due">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialItem.Due' | translate}} </th>
+        <td mat-cell *matCellDef="let item"> {{item.dueDate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef [style.width]="'100px'"></th>
+        <td mat-cell *matCellDef="let category" [style.width]="'100px'">
+          <button class="btn grid-edit-button" (click)="edit(category)">{{'Actions.Edit' | translate}}</button>
+        </td>
+      </ng-container> 
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef [style.width]="'100px'"></th>
+        <td mat-cell *matCellDef="let category" [style.width]="'100px'">
+          <button class="btn grid-delete-button" (click)="delete(category)">{{'Actions.Delete' | translate}}</button>
+        </td>
+      </ng-container>
+    </app-data-grid>
   </app-tab>
-  <app-tab title="Items"></app-tab>
   <app-tab title="Attachements"></app-tab>
 </app-tab-card>

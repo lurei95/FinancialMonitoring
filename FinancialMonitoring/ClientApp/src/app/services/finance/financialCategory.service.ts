@@ -1,3 +1,4 @@
+import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { FinancialCategoryModel } from "src/app/models/finance/financialCatgegory.model";
@@ -46,5 +47,21 @@ export class FinancialCategoryService extends ModelServiceBase<FinancialCategory
     let reply = new ApiReply<FinancialCategoryModel[]>(result, true, null)
 
     return of(reply);
+  }
+
+  get(id: string): Observable<ApiReply<FinancialCategoryModel>> 
+  {
+    let model = new FinancialCategoryModel();
+    model.title = "Kategorie 1";
+    let item1 = new FinancialItemModel();
+    item1.title = "Item 1";
+    item1.value = 12;
+    let item2 = new FinancialItemModel();
+    item2.title = "Item 2";
+    item2.value = 8;
+    model.items.push(item1);
+    model.items.push(item2);
+
+    return of(new ApiReply(model, true, null));
   }
 }

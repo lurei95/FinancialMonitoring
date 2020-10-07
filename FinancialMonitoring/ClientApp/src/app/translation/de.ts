@@ -4,8 +4,6 @@ export const de =
   "Title": "Titel",
   "Properties": "Eigenschaften",
 
-  "SearchCategories": "Kategorien suchen",
-
   //Dialog options
   "Delete": "Löschen",
   "Yes": "Ja",
@@ -22,6 +20,13 @@ export const de =
     "Category": "Kategorie"
   },
 
+  //FinancialCategory
+  "FinancialCategory": {
+    "Title": "Titel",
+    "Value": "Wert",
+    "Items": "Positionen"
+  },
+
   //OccurenceKind
   "OneTime": "Einmalig",
   "Monthly": "Monatlich",
@@ -35,5 +40,15 @@ export const de =
   "EmptyField": 'Für das Feld "{{name}}" wird ein Wert benötigt.',
 
   //Titles
-  "FinancialItem_Title": 'Position "{{title}}"'
+  "FinancialItem_Title": 'Position "{{title}}"',
+  "FinancialCategory_Title": 'Kategorie "{{title}}"',
+  "SearchCategories": "Kategorien suchen",
+
+  //Actions
+  "Actions": {
+    "Edit": "Edit",
+    "New": "Neu",
+    "Delete": "Löschen",
+    "AddItem": "Position Hinzufügen"
+  },
 }

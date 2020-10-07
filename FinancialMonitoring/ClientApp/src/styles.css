@@ -58,6 +58,11 @@ code {
   border-color: #2196D6;
 }
 
+h2 {
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+  margin: 0 0 16px;
+}
+
 @media (min-width: 768px) {
   .fullscreen-row {
     flex-direction: row !important;
