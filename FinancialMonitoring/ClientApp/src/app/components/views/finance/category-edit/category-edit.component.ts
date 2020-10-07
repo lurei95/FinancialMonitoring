@@ -1,3 +1,4 @@
+import { RequiredValidator } from './../../../../services/validation/required-validator.service';
 import { AttachmentItemModel } from './../../../../models/finance/attachmentItem.model';
 import { MatDialog } from '@angular/material/dialog/';
 import { DataGridComponent } from './../../../data/data-grid/data-grid.component';
@@ -34,6 +35,8 @@ export class CategoryEditComponent implements OnInit
 
   private attachmentsDataSource: MatTableDataSource<AttachmentItemModel> = new MatTableDataSource();
 
+  private titleValidator: (param: any) => string;
+
   @ViewChild('itemGrid', {static: false}) private itemGrid: DataGridComponent;
 
   @ViewChild('attachmentGrid', {static: false}) private attachmentGrid: DataGridComponent;
@@ -60,6 +63,7 @@ export class CategoryEditComponent implements OnInit
    * @param {FinancialCategoryService} service Injected: FinancialCategoryService
    * @param {NotificationService} notificationService Injected: NotificationService
    * @param {LocalizationService} localizationService Injected: LocalizationService
+   * @param {RequiredValidator} requiredValidator Injected: RequiredValidator
    * @param {Router} router Injected: Router
    * @param {MatDialog} dialog Injected: MatDialog
    */
@@ -67,8 +71,9 @@ export class CategoryEditComponent implements OnInit
     private service: FinancialCategoryService, 
     private notificationService: NotificationService,
     private localizationService: LocalizationService,
+    requiredValidator: RequiredValidator,
     private router: Router, private dialog: MatDialog) 
-  { }
+  { this.titleValidator = requiredValidator.getValidator("FinancialCategory.Title"); }
 
   /**
    * @inheritdoc

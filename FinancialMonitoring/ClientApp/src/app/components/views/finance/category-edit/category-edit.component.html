@@ -1,7 +1,7 @@
 <app-tab-card [title]="title">
   <app-tab [title]="('MainProperties' | translate)">
     <h2 class="ml-3 mb-2 mt-3">{{'Title' | translate}}</h2>
-    <app-text-edit 
+    <app-text-edit [validator]="titleValidator"
       [captionWidth]="100" [caption]="('FinancialCategory.Title' | translate)">
     </app-text-edit>
     <h2 class="ml-3 mb-2 mt-3">{{'FinancialCategory.Items' | translate}}</h2>
