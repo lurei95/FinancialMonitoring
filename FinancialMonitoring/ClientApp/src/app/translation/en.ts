@@ -24,7 +24,14 @@ export const en =
   "FinancialCategory": {
     "Title": "Title",
     "Value": "Value",
-    "Items": "Items"
+    "Items": "Items",
+    "Attachments": "Attachments"
+  },
+
+  //AttachmentItem
+  "AttachmentItem": {
+    "Title": "Title",
+    "AddedDate": "Added Date"
   },
 
   //OccurenceKind

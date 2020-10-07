@@ -24,7 +24,14 @@ export const de =
   "FinancialCategory": {
     "Title": "Titel",
     "Value": "Wert",
-    "Items": "Positionen"
+    "Items": "Positionen",
+    "Attachments": "Anhänge"
+  },
+
+  //AttachmentItem
+  "AttachmentItem": {
+    "Title": "Titel",
+    "AddedDate": "Hinzugefügt am"
   },
 
   //OccurenceKind
