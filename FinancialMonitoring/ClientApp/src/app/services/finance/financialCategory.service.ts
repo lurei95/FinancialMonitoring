@@ -1,3 +1,4 @@
+import { AttachmentItemModel } from './../../models/finance/attachmentItem.model';
 import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
@@ -61,6 +62,9 @@ export class FinancialCategoryService extends ModelServiceBase<FinancialCategory
     item2.value = 8;
     model.items.push(item1);
     model.items.push(item2);
+    let attachment: AttachmentItemModel = new AttachmentItemModel();
+    attachment.title = "test";
+    model.attachments.push(attachment);
 
     return of(new ApiReply(model, true, null));
   }

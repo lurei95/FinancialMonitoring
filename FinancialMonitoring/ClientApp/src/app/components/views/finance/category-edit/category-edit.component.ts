@@ -30,9 +30,9 @@ export class CategoryEditComponent implements OnInit
 
   private attachmentColumns: string[] = ["new", "title", "addedDate", "delete"];
 
-  private dataSource: MatTableDataSource<FinancialItemModel> = new MatTableDataSource();
+  private itemsDataSource: MatTableDataSource<FinancialItemModel> = new MatTableDataSource();
 
-  private attachmentDataSource: MatTableDataSource<AttachmentItemModel> = new MatTableDataSource();
+  private attachmentsDataSource: MatTableDataSource<AttachmentItemModel> = new MatTableDataSource();
 
   @ViewChild('itemGrid', {static: false}) private itemGrid: DataGridComponent;
 
@@ -45,8 +45,8 @@ export class CategoryEditComponent implements OnInit
   set entity(value: FinancialCategoryModel)
   { 
     this._entity = value;
-    this.dataSource.data = value.items; 
-    this.attachmentDataSource.data = value.attachments;
+    this.itemsDataSource.data = value.items; 
+    this.attachmentsDataSource.data = value.attachments;
   }
   /**
    * @returns {FinancialCategoryModel} The category which is bein edited
