@@ -1,4 +1,5 @@
 ﻿using FinancialMonitoring.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -98,6 +99,10 @@ namespace SpacedRepetitionSystem.WebAPI.Core
       TEntity exisiting = await Context.FindAsync<TEntity>(entity.Id);
       if (exisiting == null)
         return NotFound();
+      string error = ValidateSave(entity);
+      if (!string.IsNullOrEmpty(error))
+        return StatusCode(StatusCodes.Status500InternalServerError, error);
+
       Context.Entry(exisiting).State = EntityState.Detached;
       Context.Entry(entity).State = EntityState.Modified;
       return await Task.FromResult(entity);
@@ -112,6 +117,9 @@ namespace SpacedRepetitionSystem.WebAPI.Core
       TEntity entity = await Context.FindAsync<TEntity>(id);
       if (entity == null)
         return NotFound();
+      string error = ValidateDelete(entity);
+      if (!string.IsNullOrEmpty(error))
+        return StatusCode(StatusCodes.Status500InternalServerError, error);
       Context.Remove(entity);
       return Ok();
     }
@@ -122,6 +130,9 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     /// <param name="entity">The new entity</param>
     protected virtual async Task<ActionResult<TEntity>> PostCoreAsync(TEntity entity)
     {
+      string error = ValidateSave(entity);
+      if (!string.IsNullOrEmpty(error))
+        return StatusCode(StatusCodes.Status500InternalServerError, error);
       Context.Add(entity);
       return await Task.FromResult(entity);
     }
@@ -131,5 +142,17 @@ namespace SpacedRepetitionSystem.WebAPI.Core
     /// </summary>
     /// <returns></returns>
     protected Guid GetUserId() => Guid.Parse(User.Identity.Name);
+
+    /// <summary>
+    /// Validates whether the entity can be saved
+    /// </summary>
+    /// <returns>Error or null</returns>
+    protected virtual string ValidateSave(TEntity entity) => null;
+
+    /// <summary>
+    /// Validates whether the entity can be deleted
+    /// </summary>
+    /// <returns>Error or null</returns>
+    protected virtual string ValidateDelete(TEntity entity) => null;
   }
 }

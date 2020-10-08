@@ -20,8 +20,7 @@ namespace FinancialMonitoring.Controllers.Security
   /// <summary>
   /// Controller for <see cref="User"/>
   /// </summary>
-  [Route("a" +
-    "pi/[controller]")]
+  [Route("api/[controller]")]
   [ApiController]
   public sealed class UsersController : EntityControllerBase<User, Guid>
   {

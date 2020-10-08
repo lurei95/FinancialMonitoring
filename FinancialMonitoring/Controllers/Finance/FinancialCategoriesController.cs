@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SpacedRepetitionSystem.WebAPI.Core;
 using System.Collections.Generic;
 using System.Linq;
+using FinancialMonitoring.Utility;
 using System.Threading.Tasks;
 
 namespace FinancialMonitoring.Controllers.Finance
@@ -46,6 +47,15 @@ namespace FinancialMonitoring.Controllers.Finance
         .Include(category => category.Attachments)
         .Where(category => category.UserId == GetUserId());
       return await query.ToListAsync();
+    }
+
+    protected override string ValidateSave(FinancialCategory entity)
+    {
+      if (Context.Set<FinancialCategory>().Any(category => category.FinancialCategoryId != entity.FinancialCategoryId 
+        && category.Title == entity.Title 
+        && category.UserId == entity.UserId))
+        return Errors.CategoryTitleNotUnique.FormatWith(entity.Title);
+      return base.ValidateSave(entity);
     }
   }
 }
