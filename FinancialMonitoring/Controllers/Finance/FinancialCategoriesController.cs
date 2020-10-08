@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SpacedRepetitionSystem.WebAPI.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +13,7 @@ namespace FinancialMonitoring.Controllers.Finance
   /// </summary>
   [Route("[controller]")]
   [ApiController]
-  public sealed class FinancialCategoriesController : EntityControllerBase<FinancialCategory, Guid>
+  public sealed class FinancialCategoriesController : EntityControllerBase<FinancialCategory, long>
   {
     /// <summary>
     /// Constructor
@@ -25,7 +24,7 @@ namespace FinancialMonitoring.Controllers.Finance
 
     ///<inheritdoc/>
     [HttpGet("{id}")]
-    public override async Task<ActionResult<FinancialCategory>> GetAsync([FromRoute] Guid id)
+    public override async Task<ActionResult<FinancialCategory>> GetAsync([FromRoute] long id)
     {
       FinancialCategory category = await Context.Set<FinancialCategory>()
         .Include(category => category.Attachments)

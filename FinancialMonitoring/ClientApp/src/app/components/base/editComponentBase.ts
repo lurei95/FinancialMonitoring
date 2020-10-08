@@ -58,11 +58,10 @@ export abstract class EditComponentsBase<TEntity>
         if (reply.successful)
         {
           //Display success message
-          return true;
+          this.entity = reply.result;
         }
         else
           this.notificationService.notifyErrorMessage(reply.message);
-        return false;
       }),
       map(reply => reply.successful)
     );  

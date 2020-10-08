@@ -33,9 +33,9 @@ export abstract class ModelServiceBase<TModel>
    * Creates the model
    * 
    * @param {TModel} parameter Model to create
-   * @returns {Observable<ApiReply<unknown>>} Oberservable for the result of the api call
+   * @returns {Observable<ApiReply<TModel>>} Oberservable for the result of the api call
    */
-  create(parameter: TModel): Observable<ApiReply<unknown>> 
+  create(parameter: TModel): Observable<ApiReply<TModel>> 
   { 
     return this.withAuthentication(
       (headers) => this.apiService.post(this.path, parameter, this.type, headers)); 
@@ -45,9 +45,9 @@ export abstract class ModelServiceBase<TModel>
    * Updates the model
    * 
    * @param {TModel} parameter Model to update
-   * @returns {Observable<ApiReply<unknown>>} Oberservable for the result of the api call
+   * @returns {Observable<ApiReply<TModel>>} Oberservable for the result of the api call
    */
-  update(parameter: TModel): Observable<ApiReply<unknown>> 
+  update(parameter: TModel): Observable<ApiReply<TModel>> 
   { 
     return this.withAuthentication(
       (headers) => this.apiService.put(this.path, parameter, this.type, headers)); 
