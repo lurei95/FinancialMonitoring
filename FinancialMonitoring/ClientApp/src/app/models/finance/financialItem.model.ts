@@ -8,25 +8,25 @@ import { AttachmentItemModel } from "./attachmentItem.model";
  */
 export class FinancialItemModel
 {
-  private _financialItemId: string;
+  private _financialItemId: number;
   /**
-   * @returns {string} The id of the item
+   * @returns {number} The id of the item
    */
-  get financialItemId(): string { return this._financialItemId; }
+  get financialItemId(): number { return this._financialItemId; }
   /**
-   * @param {string} value The id of the item
+   * @param {number} value The id of the item
    */
-  set financialItemId(value: string) { this._financialItemId = value; }
+  set financialItemId(value: number) { this._financialItemId = value; }
 
-  private _categoryId: string;
+  private _categoryId: number;
   /**
-   * @returns {string} The id of the category
+   * @returns {number} The id of the category
    */
-  get categoryId(): string { return this._categoryId; }
+  get categoryId(): number { return this._categoryId; }
   /**
-   * @param {string} value The id of the category
+   * @param {number} value The id of the category
    */
-  set categoryId(value: string) { this._categoryId = value; }
+  set categoryId(value: number) { this._categoryId = value; }
 
   private _title: string = "";
   /**

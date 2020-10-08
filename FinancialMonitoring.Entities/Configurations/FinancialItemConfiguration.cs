@@ -20,7 +20,8 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.HasKey(item => item.FinancialItemId);
 
       builder.Property(item => item.FinancialItemId)
-        .IsRequired();
+        .IsRequired()
+        .ValueGeneratedOnAdd();
 
       builder.Property(item => item.Title)
         .IsRequired()

@@ -59,7 +59,7 @@ export abstract class ModelServiceBase<TModel>
    * @param {any} id Id of the model to delete
    * @returns {Observable<ApiReply<unknown>>} Oberservable for the result of the api call
    */
-  delete(id: string): Observable<ApiReply<unknown>>
+  delete(id: any): Observable<ApiReply<unknown>>
   { 
     return this.withAuthentication(
       (headers) => this.apiService.delete(this.path + "/" + id, this.type, headers)); 

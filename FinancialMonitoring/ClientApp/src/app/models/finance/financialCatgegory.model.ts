@@ -7,15 +7,15 @@ import { DirectionKind } from "./directionKind";
 */
 export class FinancialCategoryModel
 {
-  private _financialCategoryId: string;
+  private _financialCategoryId: number;
   /**
-   * @returns {string} The id of the category
+   * @returns {number} The id of the category
    */
-  get financialCategoryId(): string { return this._financialCategoryId; }
+  get financialCategoryId(): number { return this._financialCategoryId; }
   /**
-   * @param {string} value The id of the category
+   * @param {number} value The id of the category
    */
-  set financialCategoryId(value: string) { this._financialCategoryId = value; }
+  set financialCategoryId(value: number) { this._financialCategoryId = value; }
 
   private _title: string;
   /**
@@ -43,15 +43,15 @@ export class FinancialCategoryModel
     return ownSum + this.childCategories.reduce((sum, current) => sum + current.value, 0); 
   }
 
-  private _parentId: string;
+  private _parentId: number;
   /**
    * @returns {string} The id of the parent category
    */
-  get parentId(): string { return this._parentId; }
+  get parentId(): number { return this._parentId; }
   /**
    * @param {string} value The id of the parent category
    */
-  set parentId(value: string) { this._parentId = value; }
+  set parentId(value: number) { this._parentId = value; }
 
   private _userId: string;
   /**

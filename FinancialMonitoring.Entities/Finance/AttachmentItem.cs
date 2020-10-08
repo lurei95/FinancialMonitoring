@@ -1,4 +1,5 @@
 ﻿using FinancialMonitoring.Entities.Security;
+using Newtonsoft.Json;
 using System;
 
 namespace FinancialMonitoring.Entities
@@ -11,37 +12,44 @@ namespace FinancialMonitoring.Entities
     /// <summary>
     /// Id of the attachement
     /// </summary>
+    [JsonProperty("_attachmentId")]
     public long AttachmentItemId { get; set; }
 
     /// <summary>
     /// Id of the parent financial Item
     /// </summary>
-    public Guid? FinancialItemId { get; set; }
+    [JsonProperty("_financialItemId")]
+    public long? FinancialItemId { get; set; }
 
     /// <summary>
     /// Id of the parent financial category
     /// </summary>
-    public Guid? FinancialCategoryId { get; set; }
+    [JsonProperty("_financialCategoryId")]
+    public long? FinancialCategoryId { get; set; }
 
     /// <summary>
     /// Title of the attachement
     /// </summary>
+    [JsonProperty("_title")]
     public string Title { get; set; }
 
     /// <summary>
     /// The attachment
     /// </summary>
-    public string Attachement { get; set; }
+    [JsonProperty("_attachment")]
+    public string Attachment { get; set; }
 
     /// <summary>
     /// Date when the attachement was added
     /// </summary>
+    [JsonProperty("_addedDate")]
     public DateTime AddedDate { get; set; }
 
     ///<inheritdoc/>
     public object Id => AttachmentItemId;
 
     ///<inheritdoc/>
+    [JsonProperty("_userId")]
     public Guid UserId { get; set; }
 
     #region references

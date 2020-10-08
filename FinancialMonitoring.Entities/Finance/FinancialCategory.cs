@@ -15,7 +15,7 @@ namespace FinancialMonitoring.Entities.Finance
     /// Id of the category
     /// </summary>
     [JsonProperty("_financialCategoryId")]
-    public Guid FinancialCategoryId { get; set; }
+    public long FinancialCategoryId { get; set; }
 
     /// <summary>
     /// The title of the category
@@ -27,7 +27,7 @@ namespace FinancialMonitoring.Entities.Finance
     /// Id of the parent category
     /// </summary>
     [JsonProperty("_parentId")]
-    public Guid? ParentId { get; set; }
+    public long? ParentId { get; set; }
 
     ///<inheritdoc/>
     public object Id => FinancialCategoryId;

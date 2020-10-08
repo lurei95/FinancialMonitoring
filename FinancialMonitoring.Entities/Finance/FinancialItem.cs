@@ -14,13 +14,13 @@ namespace FinancialMonitoring.Entities.Finance
     /// Id of the item
     /// </summary>
     [JsonProperty("_financialItemId")]
-    public Guid FinancialItemId { get; set; }
+    public long FinancialItemId { get; set; }
 
     /// <summary>
     /// Id of the Category the item belongs to
     /// </summary>
     [JsonProperty("_categoryId")]
-    public Guid CategoryId { get; set; }
+    public long CategoryId { get; set; }
 
     /// <summary>
     /// The title of the item

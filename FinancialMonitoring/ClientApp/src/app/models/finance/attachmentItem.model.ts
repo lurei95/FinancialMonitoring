@@ -3,15 +3,15 @@
  */
 export class AttachmentItemModel
 {
-  private _attachmentItemId: string;
+  private _attachmentItemId: number;
   /**
-   * @returns {string} The id of the attachment
+   * @returns {number The id of the attachment
    */
-  get attachmentItemId(): string { return this._attachmentItemId; }
+  get attachmentItemId(): number { return this._attachmentItemId; }
   /**
    * @param {string} value The id of the attachment
    */
-  set attachmentItemId(value: string) { this._attachmentItemId = value; }
+  set attachmentItemId(value: number) { this._attachmentItemId = value; }
 
   private _title: string;
   /**
@@ -43,15 +43,25 @@ export class AttachmentItemModel
    */
   set addedDate(value: Date) { this._addedDate = value; }
 
-  private _parentId: string;
+  private _financialCategoryId: number;
   /**
-   * @returns {string} The id of the parent entity
+   * @returns {number} The id of the category
    */
-  get parentId(): string { return this._parentId; }
+  get financialCategoryId(): number { return this._financialCategoryId; }
   /**
-   * @param {string} value The id of the parent entity
+   * @param {number} value The id of the category
    */
-  set parentId(value: string) { this._parentId = value; }
+  set financialCategoryId(value: number) { this._financialCategoryId = value; }
+
+  private _financialItemId: number;
+  /**
+   * @returns {number} The id of the item
+   */
+  get financialItemId(): number { return this._financialItemId; }
+  /**
+   * @param {number} value The id of the item
+   */
+  set financialItemId(value: number) { this._financialItemId = value; }
 
   private _userId: string;
   /**

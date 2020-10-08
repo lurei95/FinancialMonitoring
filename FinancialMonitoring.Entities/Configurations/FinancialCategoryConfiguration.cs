@@ -19,7 +19,8 @@ namespace FinancialMonitoring.Entities.Configurations
       builder.HasKey(category => category.FinancialCategoryId);
 
       builder.Property(category => category.FinancialCategoryId)
-        .IsRequired();
+        .IsRequired()
+        .ValueGeneratedOnAdd();
 
       builder.Property(category => category.Title)
         .IsRequired()
