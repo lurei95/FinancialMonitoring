@@ -1,3 +1,4 @@
+import { IModel } from './../iModel';
 import { FinancialItemModel } from "./financialItem.model";
 import { AttachmentItemModel } from "./attachmentItem.model";
 import { DirectionKind } from "./directionKind";
@@ -5,7 +6,7 @@ import { DirectionKind } from "./directionKind";
 /**
 * A catgory in which multiple financial items can be organized
 */
-export class FinancialCategoryModel
+export class FinancialCategoryModel implements IModel
 {
   private _financialCategoryId: number;
   /**
@@ -102,4 +103,9 @@ export class FinancialCategoryModel
    * @param {AttachmentItemModel[]} value The attachments to the category
    */
   set attachments(value: AttachmentItemModel[]) { this._attachments = value; }
+
+  /**
+   * @inheritdoc
+   */
+  public getId() { return this.financialCategoryId; }
 }

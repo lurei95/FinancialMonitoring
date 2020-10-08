@@ -12,6 +12,8 @@ export const en =
 
   //FinancialItem
   "FinancialItem": {
+    "SaveMessage": 'The item "{{name}}" was saved successfully.',
+    "DeleteMessage": 'The item "{{name}}" was deleted successfully.',
     "Title": "Title",
     "Due": "Due",
     "Value": "Value",
@@ -22,6 +24,8 @@ export const en =
 
   //FinancialCategory
   "FinancialCategory": {
+    "SaveMessage": 'The category "{{name}}" was saved successfully.',
+    "DeleteMessage": 'The category "{{name}}" was deleted successfully.',
     "Title": "Title",
     "Value": "Value",
     "Items": "Items",

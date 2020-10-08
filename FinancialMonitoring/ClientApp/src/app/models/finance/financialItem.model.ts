@@ -107,4 +107,9 @@ export class FinancialItemModel
    * @param {AttachmentItemModel[]} value The attachments to the item
    */
   set attachments(value: AttachmentItemModel[]) { this._attachments = value; }
+
+  /**
+   * @inheritdoc
+   */
+  public getId() { return this.financialItemId; }
 }

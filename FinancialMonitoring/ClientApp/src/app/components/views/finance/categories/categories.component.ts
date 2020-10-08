@@ -1,3 +1,5 @@
+import { LocalizationService } from 'src/app/services/utility/localization.service';
+import { services } from './../../../../services/services';
 import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
 import { Router } from '@angular/router';
 import { SearchGridComponent } from './../../../data/search-grid/search-grid.component';
@@ -10,6 +12,7 @@ import { Component, ViewChild} from '@angular/core';
 import { ApiReply } from 'src/app/models/utility/apiReply';
 import { MatDialog } from '@angular/material';
 import { FinancialItemEditDialogComponent } from '../financial-item-edit-dialog/financial-item-edit-dialog.component';
+import { ModelComponentBase } from 'src/app/components/base/modelComponentBase';
 
 /**
  * Components for displaying a list of categories
@@ -19,7 +22,7 @@ import { FinancialItemEditDialogComponent } from '../financial-item-edit-dialog/
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
-export class CategoriesComponent
+export class CategoriesComponent extends ModelComponentBase<FinancialCategoryModel>
 {
   private columns: string[] = ["new", "title", "value", "items", "edit", "add-item", "delete"];
 
@@ -31,12 +34,17 @@ export class CategoriesComponent
    * Constructor
    * 
    * @param {FinancialCategoryService} service Injected: FinancialCategoryService
-   * @param {FinancialCategoryService} service Injected: NotificationService
+   * @param {LocalizationService} localizationService Injected: LocalizationService
+   * @param {Router} router Injected: Router
+   * @param {MatDialog} dialog Injected: MatDialog
+   * @param {NotificationService} notificationService Injected: NotificationService
    */
-  constructor(private service: FinancialCategoryService, 
+  constructor(service: FinancialCategoryService, 
+    localizationService: LocalizationService,
     private router: Router, private dialog: MatDialog,
-    private notificationService: NotificationService)
+    notificationService: NotificationService)
   {
+    super(service, localizationService, notificationService)
     this.searchFunction = (param: string) => 
     {
       let result$: Observable<ApiReply<FinancialCategoryModel[]>>;
@@ -48,10 +56,16 @@ export class CategoriesComponent
     }
   }
 
-  private delete(model: FinancialCategoryModel)
+  /**
+   * @inheritdoc
+   */
+  protected delete(model: FinancialCategoryModel) : Observable<boolean>
   { 
-    this.grid.removeItem(model);
-    this.service.delete(model.financialCategoryId).pipe(tap(reply => this.handleApiReply(reply))); 
+    return super.delete(model).pipe(tap(successful => 
+    {
+      if (successful)
+        this.grid.removeItem(model);
+    }));
   }
 
   private edit(model: FinancialCategoryModel)

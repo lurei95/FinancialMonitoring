@@ -1,13 +1,17 @@
+import { services } from './../../services/services';
+import { IModel } from './../../models/iModel';
+import { LocalizationService } from 'src/app/services/utility/localization.service';
 import { ApiReply } from 'src/app/models/utility/apiReply';
 import { Observable } from 'rxjs';
 import { NotificationService } from './../../services/utility/notification.service';
 import { map, tap } from "rxjs/operators";
 import { ModelServiceBase } from "src/app/services/modelServiceBase";
+import { ModelComponentBase } from './modelComponentBase';
 
 /**
  * Baseclass for a component to edit an entity
  */
-export abstract class EditComponentsBase<TEntity>
+export abstract class EditComponentsBase<TEntity extends IModel> extends ModelComponentBase<TEntity>
 {
   private _entity: TEntity;
   /**
@@ -33,11 +37,13 @@ export abstract class EditComponentsBase<TEntity>
    * Constructor
    * 
    * @param {ModelServiceBase<TEntity>} service: Injected: ModelServiceBase<TEntity>
-   * @param {ModelServiceBase<TEntity>} notificationService: Injected: NotificationService
+   * @param {LocalizationService} localizationService: Injected: LocalizationService
+   * @param {NotificationService} notificationService: Injected: NotificationService
    */
-  constructor(protected service: ModelServiceBase<TEntity>, 
-    protected notificationService: NotificationService)
-  { }
+  constructor(service: ModelServiceBase<TEntity>,
+    localizationService: LocalizationService, 
+    notificationService: NotificationService)
+  { super(service, localizationService, notificationService); }
 
   /**
    * Saves the changes of the current entity
@@ -57,7 +63,8 @@ export abstract class EditComponentsBase<TEntity>
       {
         if (reply.successful)
         {
-          //Display success message
+          const message = this.localizationService.execute(this.entity.constructor.name + ".SaveMessage");
+          this.notificationService.notifySuccessMessage(message);
           this.entity = reply.result;
         }
         else

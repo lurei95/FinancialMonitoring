@@ -56,10 +56,10 @@ export class FinancialItemEditDialogComponent extends EditComponentsBase<Financi
     service: FinancialItemService, 
     notificationService: NotificationService,
     requiredValidator: RequiredValidator,
-    private localizationService: LocalizationService,
+    localizationService: LocalizationService,
     private self: MatDialogRef<FinancialItemEditDialogComponent>) 
   { 
-    super(service, notificationService);
+    super(service, localizationService,notificationService);
     this.entity = data;
     this.titleValidator = requiredValidator.getValidator("FinancialItem.Title");
     this.valueValidator = requiredValidator.getValidator("FinancialItem.Value");

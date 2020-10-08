@@ -71,11 +71,11 @@ export class CategoryEditComponent extends EditComponentsBase<FinancialCategoryM
   constructor(private route: ActivatedRoute, 
     service: FinancialCategoryService, 
     notificationService: NotificationService,
-    private localizationService: LocalizationService,
+    localizationService: LocalizationService,
     requiredValidator: RequiredValidator,
     private router: Router, private dialog: MatDialog) 
   { 
-    super(service, notificationService);
+    super(service, localizationService, notificationService);
     this.titleValidator = requiredValidator.getValidator("FinancialCategory.Title"); 
   }
 

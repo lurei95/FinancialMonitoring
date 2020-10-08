@@ -12,6 +12,8 @@ export const de =
 
   //FinancialItem
   "FinancialItem": {
+    "SaveMessage": 'Die Position "{{name}}" wurde erfolgreich gespeichert.',
+    "DeleteMessage": 'Die Position "{{name}}" wurde erfolgreich gelöscht.',
     "Title": "Titel",
     "Due": "Fällig",
     "Value": "Wert",
@@ -22,6 +24,8 @@ export const de =
 
   //FinancialCategory
   "FinancialCategory": {
+    "SaveMessage": 'Die Kategorie "{{name}}" wurde erfolgreich gespeichert.',
+    "DeleteMessage": 'Die Kategorie "{{name}}" wurde erfolgreich gelöscht.',
     "Title": "Titel",
     "Value": "Wert",
     "Items": "Positionen",
