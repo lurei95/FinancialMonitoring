@@ -16,9 +16,10 @@
       </div>
     </div>
   </div>
-  <app-wait-spinner [show]="isLoading">
+  <app-wait-spinner [show]="isLoading" class="d-flex flex-column">
     <div class="card-body flex-column scrollable d-flex flex-grow-1">
       <ng-content></ng-content>
     </div>
+    <ng-content select="div.card-footer"></ng-content>
   </app-wait-spinner>
 </div>
