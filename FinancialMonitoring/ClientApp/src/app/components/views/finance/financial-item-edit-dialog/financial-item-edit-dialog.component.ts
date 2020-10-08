@@ -3,13 +3,12 @@ import { LocalizationService } from 'src/app/services/utility/localization.servi
 import { DirectionKind } from './../../../../models/finance/directionKind';
 import { OccurenceKind } from './../../../../models/finance/occurenceKind';
 import { MaskKind } from './../../../controls/text-edit/mask-kind';
-import { map, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { NotificationService } from './../../../../services/utility/notification.service';
 import { FinancialItemService } from './../../../../services/finance/financialItem.service';
 import { Component, Inject } from '@angular/core';
 import { FinancialItemModel } from 'src/app/models/finance/financialItem.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EditComponentsBase } from 'src/app/components/base/editComponentBase';
 
 /**
  * Dialog for editing or creating a @see FinancialItemModel
@@ -19,12 +18,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './financial-item-edit-dialog.component.html',
   styleUrls: ['./financial-item-edit-dialog.component.css']
 })
-export class FinancialItemEditDialogComponent
+export class FinancialItemEditDialogComponent extends EditComponentsBase<FinancialItemModel>
 {
   private get title(): string 
-  { return this.localizationService.execute("FinancialItem_Title", { title: this._entity.title }); } 
-
-  private _entity: FinancialItemModel;
+  { return this.localizationService.execute("FinancialItem_Title", { title: this.entity.title }); } 
 
   private maskKind = MaskKind.Currency
 
@@ -32,13 +29,13 @@ export class FinancialItemEditDialogComponent
 
   private valueValidator: (param: any) => string;
 
-  private get value():string { return this._entity.value.toString(); }
+  private get value():string { return this.entity.value.toString(); }
 
   private set value(value: string)
   {
     let number: number = Number(value);
     if (number)
-      this._entity.value = number;
+      this.entity.value = number;
   }
 
   private occurenceKindType = OccurenceKind
@@ -56,20 +53,21 @@ export class FinancialItemEditDialogComponent
    * @param {MatDialogRef<FinancialItemEditDialogComponent>} self Injected: dialog
    */
   constructor(@Inject(MAT_DIALOG_DATA) data: FinancialItemModel,
-    private service: FinancialItemService, 
-    private notificationService: NotificationService,
+    service: FinancialItemService, 
+    notificationService: NotificationService,
     requiredValidator: RequiredValidator,
     private localizationService: LocalizationService,
     private self: MatDialogRef<FinancialItemEditDialogComponent>) 
   { 
-    this._entity = data;
+    super(service, notificationService);
+    this.entity = data;
     this.titleValidator = requiredValidator.getValidator("FinancialItem.Title");
     this.valueValidator = requiredValidator.getValidator("FinancialItem.Value");
   }
 
   private saveAndClose()
   {
-    this.save().subscribe(result =>
+    this.saveChanges().subscribe(result =>
     {
       if (result)
         close();
@@ -78,29 +76,11 @@ export class FinancialItemEditDialogComponent
 
   private close() { this.self.close(); }
 
-  private save() : Observable<boolean>
-  {
-    return this.service.create(this._entity).pipe(
-      tap(reply => 
-      {
-        if (reply.successful)
-        {
-          //Display success message
-          return true;
-        }
-        else
-          this.notificationService.notifyErrorMessage(reply.message);
-        return false;
-      }),
-      map(reply => reply.successful)
-    );  
-  }
-
   private onOccurenceKindChanged(occurenceKind: OccurenceKind) 
-  { this._entity.occurenceKind = occurenceKind; }
+  { this.entity.occurenceKind = occurenceKind; }
 
   private onDirectionKindChanged(directionKind: DirectionKind) 
-  { this._entity.direction = directionKind; }
+  { this.entity.direction = directionKind; }
 
-  private handleDateChanged(date: Date) { this._entity.dueDate = date; }
+  private handleDateChanged(date: Date) { this.entity.dueDate = date; }
 }

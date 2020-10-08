@@ -1,3 +1,5 @@
+import { services } from './../../../../services/services';
+import { EditComponentsBase } from 'src/app/components/base/editComponentBase';
 import { RequiredValidator } from './../../../../services/validation/required-validator.service';
 import { AttachmentItemModel } from './../../../../models/finance/attachmentItem.model';
 import { MatDialog } from '@angular/material/dialog/';
@@ -22,7 +24,7 @@ import { ApiReply } from 'src/app/models/utility/apiReply';
   templateUrl: './category-edit.component.html',
   styleUrls: ['./category-edit.component.css']
 })
-export class CategoryEditComponent implements OnInit 
+export class CategoryEditComponent extends EditComponentsBase<FinancialCategoryModel> implements OnInit 
 {
   private get title(): string  
   { return this.localizationService.execute("FinancialCategory_Title", { title: this.entity.title }); }
@@ -41,20 +43,19 @@ export class CategoryEditComponent implements OnInit
 
   @ViewChild('attachmentGrid', {static: false}) private attachmentGrid: DataGridComponent;
 
-  private _entity: FinancialCategoryModel;
   /**
    * @param {FinancialCategoryModel} value The category which is bein edited
    */
   set entity(value: FinancialCategoryModel)
   { 
-    this._entity = value;
+    super.entity = value;
     this.itemsDataSource.data = value.items; 
     this.attachmentsDataSource.data = value.attachments;
   }
   /**
    * @returns {FinancialCategoryModel} The category which is bein edited
    */
-  get entity(): FinancialCategoryModel{ return this._entity;  }
+  get entity(): FinancialCategoryModel { return super.entity; }
 
   /**
    * Constructor
@@ -68,12 +69,15 @@ export class CategoryEditComponent implements OnInit
    * @param {MatDialog} dialog Injected: MatDialog
    */
   constructor(private route: ActivatedRoute, 
-    private service: FinancialCategoryService, 
-    private notificationService: NotificationService,
+    service: FinancialCategoryService, 
+    notificationService: NotificationService,
     private localizationService: LocalizationService,
     requiredValidator: RequiredValidator,
     private router: Router, private dialog: MatDialog) 
-  { this.titleValidator = requiredValidator.getValidator("FinancialCategory.Title"); }
+  { 
+    super(service, notificationService);
+    this.titleValidator = requiredValidator.getValidator("FinancialCategory.Title"); 
+  }
 
   /**
    * @inheritdoc
