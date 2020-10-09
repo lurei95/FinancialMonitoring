@@ -32,7 +32,8 @@ export abstract class ModelComponentBase<TModel extends IModel>
       {
         if (reply.successful)
         {
-          const message = this.localizationService.execute(model.constructor.name + ".DeleteMessage");
+          const message = this.localizationService
+            .execute(model.constructor.name + ".DeleteMessage", { name: model.getDisplyName() });
           this.notificationService.notifySuccessMessage(message);
         }
         else

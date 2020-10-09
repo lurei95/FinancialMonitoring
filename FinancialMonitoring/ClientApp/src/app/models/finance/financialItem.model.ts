@@ -2,11 +2,12 @@ import { DirectionKind } from './directionKind';
 import { OccurenceKind } from './occurenceKind';
 import { FinancialCategoryModel } from "./financialCatgegory.model";
 import { AttachmentItemModel } from "./attachmentItem.model";
+import { IModel } from '../iModel';
 
 /**
  * A fiancial item
  */
-export class FinancialItemModel
+export class FinancialItemModel implements IModel
 {
   private _financialItemId: number;
   /**
@@ -112,4 +113,9 @@ export class FinancialItemModel
    * @inheritdoc
    */
   public getId() { return this.financialItemId; }
+  
+  /**
+   * @inheritdoc
+   */
+  public getDisplyName() { return this.title; }
 }

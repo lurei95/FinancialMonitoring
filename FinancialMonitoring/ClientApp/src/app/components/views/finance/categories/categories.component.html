@@ -7,15 +7,15 @@
       <td mat-cell *matCellDef="let category"></td>
     </ng-container>
     <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategory.Title' | translate}} </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategoryModel.Title' | translate}} </th>
       <td mat-cell *matCellDef="let category"> {{category.title}} </td>
     </ng-container>
     <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategory.Value' | translate}} </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategoryModel.Value' | translate}} </th>
       <td mat-cell *matCellDef="let category"> {{category.value}} </td>
     </ng-container>
     <ng-container matColumnDef="items">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategory.Items' | translate}} </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'FinancialCategoryModel.Items' | translate}} </th>
       <td mat-cell *matCellDef="let category"> {{category.items.length}} </td>
     </ng-container>
     <ng-container matColumnDef="edit">

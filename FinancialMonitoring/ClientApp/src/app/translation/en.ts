@@ -12,7 +12,7 @@ export const en =
   "Cancel": "Cancel",
 
   //FinancialItem
-  "FinancialItem": {
+  "FinancialItemModel": {
     "SaveMessage": 'The item "{{name}}" was saved successfully.',
     "DeleteMessage": 'The item "{{name}}" was deleted successfully.',
     "Title": "Title",
@@ -25,7 +25,7 @@ export const en =
   },
 
   //FinancialCategory
-  "FinancialCategory": {
+  "FinancialCategoryModel": {
     "SaveMessage": 'The category "{{name}}" was saved successfully.',
     "DeleteMessage": 'The category "{{name}}" was deleted successfully.',
     "Title": "Title",

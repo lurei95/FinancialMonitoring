@@ -108,4 +108,9 @@ export class FinancialCategoryModel implements IModel
    * @inheritdoc
    */
   public getId() { return this.financialCategoryId; }
+
+  /**
+   * @inheritdoc
+   */
+  public getDisplyName() { return this.title; }
 }

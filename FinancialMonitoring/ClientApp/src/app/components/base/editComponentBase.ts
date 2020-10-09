@@ -63,7 +63,8 @@ export abstract class EditComponentsBase<TEntity extends IModel> extends ModelCo
       {
         if (reply.successful)
         {
-          const message = this.localizationService.execute(this.entity.constructor.name + ".SaveMessage");
+          const message = this.localizationService
+            .execute(this.entity.constructor.name + ".SaveMessage", { name: this.entity.getDisplyName()});
           this.notificationService.notifySuccessMessage(message);
           this.entity = reply.result;
         }
