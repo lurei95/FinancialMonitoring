@@ -98,7 +98,7 @@ export class FinancialItemModel
    */
   set category(value: FinancialCategoryModel) { this._category = value; }
 
-  private _attachments: AttachmentItemModel[];
+  private _attachments: AttachmentItemModel[] = [];
   /**
    * @returns {AttachmentItemModel[]} The attachments to the item
    */

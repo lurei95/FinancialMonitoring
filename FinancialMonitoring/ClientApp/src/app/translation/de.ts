@@ -3,6 +3,7 @@ export const de =
   //General
   "Title": "Titel",
   "Properties": "Eigenschaften",
+  "MainProperties": "Hauptmerkmale",
 
   //Dialog options
   "Delete": "Löschen",
@@ -19,7 +20,8 @@ export const de =
     "Value": "Wert",
     "OccurenceKind": "Art",
     "Direction": "Richtung",
-    "Category": "Kategorie"
+    "Category": "Kategorie",
+    "Attachments": "Anhänge"
   },
 
   //FinancialCategory

@@ -19,6 +19,7 @@ import { SignupComponent } from "./views/authentication/signup/signup.component"
 import { FinancialItemEditDialogComponent } from "./views/finance/financial-item-edit-dialog/financial-item-edit-dialog.component";
 import { HomeComponent } from "./views/home/home.component";
 import { TabComponent } from './containers/tab/tab.component';
+import { FinancialItemEditComponent } from './views/finance/financial-item-edit/financial-item-edit.component';
 
 /**
  * List of the components
@@ -46,7 +47,8 @@ export const components = [
   TabComponent,
   SearchGridComponent,
   CategoryEditComponent,
-  DataGridComponent
+  DataGridComponent,
+  FinancialItemEditComponent
 ]
 
 /**
