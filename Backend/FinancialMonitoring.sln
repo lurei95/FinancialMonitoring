@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.Entities", "FinancialMonitoring.Entities\FinancialMonitoring.Entities.csproj", "{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring", "FinancialMonitoring\FinancialMonitoring.csproj", "{CFEF15EA-B919-462F-9325-E992F3F39719}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.Utility", "FinancialMonitoring.Utility\FinancialMonitoring.Utility.csproj", "{24231C4D-9670-4646-BC11-9D704C07D014}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.BusinessLogic", "FinancialMonitoring.BusinessLogic\FinancialMonitoring.BusinessLogic.csproj", "{159E1439-A2D8-49EF-9C33-571301BB0797}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialMonitoring.Resources", "FinancialMonitoring.Resources\FinancialMonitoring.Resources.csproj", "{A1092403-1C5B-41FC-A307-D15A30D5405C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialMonitoring.DataTransferObjects", "FinancialMonitoring.DataTransferObjects\FinancialMonitoring.DataTransferObjects.csproj", "{498FD653-972B-4707-ABBA-605535FF2600}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290FDC29-055C-4AF2-88B4-A0F4F2CB3328}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFEF15EA-B919-462F-9325-E992F3F39719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFEF15EA-B919-462F-9325-E992F3F39719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFEF15EA-B919-462F-9325-E992F3F39719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEF15EA-B919-462F-9325-E992F3F39719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24231C4D-9670-4646-BC11-9D704C07D014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24231C4D-9670-4646-BC11-9D704C07D014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24231C4D-9670-4646-BC11-9D704C07D014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24231C4D-9670-4646-BC11-9D704C07D014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{159E1439-A2D8-49EF-9C33-571301BB0797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{159E1439-A2D8-49EF-9C33-571301BB0797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{159E1439-A2D8-49EF-9C33-571301BB0797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{159E1439-A2D8-49EF-9C33-571301BB0797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1092403-1C5B-41FC-A307-D15A30D5405C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1092403-1C5B-41FC-A307-D15A30D5405C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1092403-1C5B-41FC-A307-D15A30D5405C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1092403-1C5B-41FC-A307-D15A30D5405C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{498FD653-972B-4707-ABBA-605535FF2600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498FD653-972B-4707-ABBA-605535FF2600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498FD653-972B-4707-ABBA-605535FF2600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498FD653-972B-4707-ABBA-605535FF2600}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15C2E6EC-95D7-4CEB-B9C1-AC982EFEE70B}
+	EndGlobalSection
+EndGlobal
